@@ -6,10 +6,88 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/login_thumbnail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/login_thumbnail" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/login_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="146dp"
+                android:src="@drawable/login_thumbnail"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:scaleType="fitCenter"
+                />
+
+            <EditText
+                android:id="@+id/input_email"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/login_thumbnail"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/button_overline"
+                android:hint="E-mail..."
+                android:padding="4dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:drawableStart="@drawable/ic_email_black_24dp"
+            />
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/input_email"
+                android:inputType="textPassword"
+                android:background="@drawable/button_overline"
+                android:hint="Password..."
+                android:padding="4dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:drawableStart="@drawable/ic_enhanced_encryption_black_24dp"
+                />
+            
+            <Button
+                android:id="@+id/btn_login_submit"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/input_password"
+                android:layout_marginTop="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_solid"
+                android:text="LOGIN"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                />
+
+            <Button
+                android:id="@+id/btn_create_account"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_login_submit"
+                android:layout_marginTop="10dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_overline"
+                android:text="CREATE ACCOUNT"
+                android:textColor="#FF5A5F"
+                android:textSize="20dp"
+                />
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
