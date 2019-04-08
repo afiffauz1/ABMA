@@ -24,32 +24,20 @@
                 android:layout_alignParentStart="true"
                 android:scaleType="fitCenter"
                 />
+
+
+
             <EditText
-                android:id="@+id/input_name"
+                android:id="@+id/input_email"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/login_thumbnail"
                 android:inputType="textEmailAddress"
                 android:background="@drawable/button_overline"
-                android:hint="Name..."
-                android:padding="4dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:drawableStart="@drawable/ic_contacts_black_24dp"
-                />
-            <EditText
-                android:id="@+id/input_email"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/input_name"
-                android:inputType="textEmailAddress"
-                android:background="@drawable/button_overline"
                 android:hint="E-mail..."
                 android:padding="4dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="130dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:drawableStart="@drawable/ic_email_black_24dp"
@@ -69,27 +57,12 @@
                 android:layout_marginRight="20dp"
                 android:drawableStart="@drawable/ic_enhanced_encryption_black_24dp"
                 />
-            <EditText
-                android:id="@+id/input_repassword"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/input_password"
-                android:inputType="textPassword"
-                android:background="@drawable/button_overline"
-                android:hint="Re-type Password..."
-                android:padding="4dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:drawableStart="@drawable/ic_enhanced_encryption_black_24dp"
-                />
 
             <Button
-                android:id="@+id/btn_submit"
+                android:id="@+id/btn_register_submit"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/input_repassword"
+                android:layout_below="@id/input_password"
                 android:layout_marginTop="30dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/button_solid"
@@ -97,6 +70,21 @@
                 android:textColor="#ffffff"
                 android:textSize="20dp"
                 />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/btn_register_submit"
+                android:layout_alignTop="@+id/btn_register_submit"
+                android:layout_alignEnd="@+id/btn_register_submit"
+                android:layout_alignBottom="@+id/btn_register_submit"
+                android:layout_marginStart="76dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="76dp"
+                android:layout_marginBottom="15dp" />
+
 
         </RelativeLayout>
 
