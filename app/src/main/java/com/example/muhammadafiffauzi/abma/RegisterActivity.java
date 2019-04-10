@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -23,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressDialog loading;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference RootRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
+        RootRef = FirebaseDatabase.getInstance().getReference();
 
         btnSubmit = (Button) findViewById(R.id.btn_register_submit);
         userEmail = (EditText) findViewById(R.id.input_email);
@@ -55,22 +59,28 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(email)){
             Toast.makeText(RegisterActivity.this, "enter your email...", Toast.LENGTH_SHORT).show();
-            loading.dismiss();
+
         }
         else if (TextUtils.isEmpty(password)){
             Toast.makeText(RegisterActivity.this, "enter your password...", Toast.LENGTH_SHORT).show();
-            loading.dismiss();
+
         } else {
 
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
-                        sendUserToLoginActivity();
+
+                        String currentUserId = mAuth.getCurrentUser().getUid();
+                        RootRef.child("Users").child(currentUserId).setValue("");
+
+                        sendUserToMainActivity();
                         Toast.makeText(RegisterActivity.this, "Account has been created", Toast.LENGTH_SHORT).show();
+                        loading.dismiss();
                     } else {
                         String errorMsg = task.getException().getMessage();
                         Toast.makeText(RegisterActivity.this, "Failed : "+ errorMsg, Toast.LENGTH_SHORT).show();
+                        loading.dismiss();
                     }
                 }
             });
@@ -80,6 +90,13 @@ public class RegisterActivity extends AppCompatActivity {
     private void sendUserToLoginActivity() {
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intent);
+    }
+
+    private void sendUserToMainActivity() {
+        Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainIntent);
+        finish();
     }
 
 

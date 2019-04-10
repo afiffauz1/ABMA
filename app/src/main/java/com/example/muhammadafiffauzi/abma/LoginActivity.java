@@ -17,12 +17,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 
 import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private FirebaseUser currentUser;
+
 
     private EditText userEmail;
     private EditText userPassword;
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog loading;
 
     private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
         loading = new ProgressDialog(this);
 
         mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
 
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,17 +105,12 @@ public class LoginActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        if(currentUser != null){
-            sendUserToMainActivity();
-        }
-    }
 
     private void sendUserToMainActivity() {
-        Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(loginIntent);
+        Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainIntent);
+        finish();
     }
 }
