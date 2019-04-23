@@ -1,15 +1,34 @@
 package com.example.muhammadafiffauzi.abma;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountActivity extends AppCompatActivity {
 
     private Button btn_update;
     private EditText userName, userStatus;
+    private CircleImageView userProfpic;
+
+    private String currentUserId;
+    private FirebaseAuth mAuth;
+    private DatabaseReference rootRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,5 +38,61 @@ public class AccountActivity extends AppCompatActivity {
         btn_update = (Button) findViewById(R.id.btn_update);
         userName = (EditText) findViewById(R.id.set_username);
         userStatus = (EditText) findViewById(R.id.set_status);
+        userProfpic = (CircleImageView) findViewById(R.id.user_profpic);
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUserId = mAuth.getCurrentUser().getUid();
+        rootRef = FirebaseDatabase.getInstance().getReference();
+
+
+        btn_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateAccount();
+            }
+        });
+    }
+
+    private void updateAccount() {
+
+        String setUserName = userName.getText().toString();
+        String setStatus = userStatus.getText().toString();
+
+        if (TextUtils.isEmpty(setUserName)){
+
+            Toast.makeText(AccountActivity.this, "please input your user name first...", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(setStatus)) {
+
+            Toast.makeText(AccountActivity.this, "please input your status...", Toast.LENGTH_SHORT).show();
+        } else  {
+
+            HashMap<String, String> profileMap = new HashMap<>();
+            profileMap.put("uid", currentUserId);
+            profileMap.put("name", setUserName);
+            profileMap.put("status", setStatus);
+
+            rootRef.child("Users").child(currentUserId).setValue(profileMap)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+
+                                sendUserToMainActivity();
+                                Toast.makeText(AccountActivity.this, "Profile has been updated", Toast.LENGTH_SHORT).show();
+                            } else {
+
+                                String errorMsg = task.getException().toString();
+                                Toast.makeText(AccountActivity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+    }
+
+    private void sendUserToMainActivity() {
+        Intent mainIntent = new Intent(AccountActivity.this, MainActivity.class);
+        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(mainIntent);
+        finish();
     }
 }

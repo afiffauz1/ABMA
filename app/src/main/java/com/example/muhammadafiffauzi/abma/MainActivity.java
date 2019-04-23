@@ -1,20 +1,28 @@
 package com.example.muhammadafiffauzi.abma;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
     private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
+    private DatabaseReference rootRef;
 
 
 
@@ -25,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        rootRef = FirebaseDatabase.getInstance().getReference();
 
         mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
@@ -37,9 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
         if(currentUser == null){
         sendUserToLoginActivity();
-    }
+    } else {
+            VerifyUserExist();
+        }
 }
-
 
 
     @Override
@@ -68,11 +78,37 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendUserToAccountMenu() {
         Intent intent = new Intent(MainActivity.this, AccountActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
 
     private void sendUserToLoginActivity() {
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
+    }
+
+    private void VerifyUserExist() {
+
+        String currentUser = mAuth.getCurrentUser().getUid();
+
+        rootRef.child("Users").child(currentUser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if ((dataSnapshot.child("name").exists())) {
+
+                    Toast.makeText(MainActivity.this, "hey", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendUserToAccountMenu();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

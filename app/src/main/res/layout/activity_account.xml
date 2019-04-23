@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".AccountActivity">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_profpic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/profpic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        ></de.hdodenhof.circleimageview.CircleImageView>
+
 
     <EditText
         android:id="@+id/set_username"
@@ -13,6 +22,7 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:hint="Username..."
+        android:layout_below="@+id/user_profpic"
         android:textAlignment="center"
         android:drawableStart="@drawable/ic_contacts_black_24dp"
         android:background="@drawable/button_overline"
