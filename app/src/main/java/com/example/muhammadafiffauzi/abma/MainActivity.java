@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,21 +23,51 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
-    private DatabaseReference rootRef;
+    private DatabaseReference mDatabase;
 
+    private TextView nameView;
+    private TextView statusView;
 
+    private String currentUserId;
+    private DatabaseReference userDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        nameView = (TextView) findViewById(R.id.name_view);
+        statusView = (TextView) findViewById(R.id.status_view);
+
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        rootRef = FirebaseDatabase.getInstance().getReference();
+        currentUserId = mAuth.getCurrentUser().getUid();
+
+        userDetail = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
+
+        userDetail.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()){
+                    String name_view = dataSnapshot.child("name").getValue().toString();
+                    String status_view = dataSnapshot.child("status").getValue().toString();
+
+                    nameView.setText(name_view);
+                    statusView.setText(status_view);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
@@ -93,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
         String currentUser = mAuth.getCurrentUser().getUid();
 
-        rootRef.child("Users").child(currentUser).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("Users").child(currentUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
