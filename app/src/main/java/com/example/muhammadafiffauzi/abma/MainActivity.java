@@ -25,10 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    private TextView nameView;
-    private TextView statusView;
 
-    private String currentUserId;
     private DatabaseReference userDetail;
 
     @Override
@@ -37,37 +34,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        nameView = (TextView) findViewById(R.id.name_view);
-        statusView = (TextView) findViewById(R.id.status_view);
-
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        currentUserId = mAuth.getCurrentUser().getUid();
 
-        userDetail = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
-
-        userDetail.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                if (dataSnapshot.exists()){
-                    String name_view = dataSnapshot.child("name").getValue().toString();
-                    String status_view = dataSnapshot.child("status").getValue().toString();
-
-                    nameView.setText(name_view);
-                    statusView.setText(status_view);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
     }
 
