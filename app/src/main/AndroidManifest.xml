@@ -21,7 +21,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".AccountActivity" />
-        <activity android:name=".LevelListActivity"></activity>
+        <activity android:name=".LevelListActivity" />
+        <activity android:name=".SelectLesson1Activity"></activity>
     </application>
 
 </manifest>
