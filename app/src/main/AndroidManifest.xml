@@ -22,7 +22,8 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".AccountActivity" />
         <activity android:name=".LevelListActivity" />
-        <activity android:name=".SelectLesson1Activity"></activity>
+        <activity android:name=".SelectLesson.SelectLesson1Activity" />
+        <activity android:name=".canvas.Quest1Lesson1Activity"></activity>
     </application>
 
 </manifest>
