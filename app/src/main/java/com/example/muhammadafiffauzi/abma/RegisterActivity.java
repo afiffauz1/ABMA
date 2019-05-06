@@ -39,7 +39,6 @@ public class RegisterActivity extends AppCompatActivity {
         btnSubmit = (Button) findViewById(R.id.btn_register_submit);
         userEmail = (EditText) findViewById(R.id.input_email);
         userPassword = (EditText) findViewById(R.id.input_password);
-        userName = (EditText) findViewById(R.id.input_name);
         loading = new ProgressDialog(this);
 
         //ketika button register di tekan
@@ -48,7 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = userEmail.getText().toString().trim();
                 String password = userPassword.getText().toString().trim();
-                final String name = userName.getText().toString().trim();
 
                 loading.setTitle("Creating new account");
                 loading.setMessage("Please wait...");
@@ -68,11 +66,6 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-
-                                String currentUserId = mAuth.getCurrentUser().getUid();
-                                DatabaseReference current_user_db = mDatabase.child(currentUserId);
-                                current_user_db.child("name").setValue(name);
-
 
                                 sendUserToMainActivity();
                                 Toast.makeText(RegisterActivity.this, "Account has been created", Toast.LENGTH_SHORT).show();
