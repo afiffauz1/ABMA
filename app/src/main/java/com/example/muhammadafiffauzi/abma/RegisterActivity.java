@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +46,9 @@ public class RegisterActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String email = userEmail.getText().toString().trim();
                 String password = userPassword.getText().toString().trim();
-
-                loading.setTitle("Creating new account");
-                loading.setMessage("Please wait...");
-                loading.setCanceledOnTouchOutside(true);
-                loading.show();
 
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(RegisterActivity.this, "enter your email...", Toast.LENGTH_SHORT).show();
@@ -61,34 +58,40 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "enter your password...", Toast.LENGTH_SHORT).show();
 
                 } else {
-
-                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
-
-                                sendUserToMainActivity();
-                                Toast.makeText(RegisterActivity.this, "Account has been created", Toast.LENGTH_SHORT).show();
-                                loading.dismiss();
-                            } else {
-                                String errorMsg = task.getException().getMessage();
-                                Toast.makeText(RegisterActivity.this, "Failed : "+ errorMsg, Toast.LENGTH_SHORT).show();
-                                loading.dismiss();
-                            }
-                        }
-                    });
+                    createNewAccount();
                 }
+
             }
         });
+
     }
 
     private void createNewAccount() {
 
-    }
+        loading.setTitle("Creating new account");
+        loading.setMessage("Please wait...");
+        loading.setCanceledOnTouchOutside(true);
+        loading.show();
 
-    private void sendUserToLoginActivity() {
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-        startActivity(intent);
+        String email = userEmail.getText().toString().trim();
+        String password = userPassword.getText().toString().trim();
+
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+
+                        sendUserToMainActivity();
+                        Toast.makeText(RegisterActivity.this, "Account has been created", Toast.LENGTH_SHORT).show();
+                        loading.dismiss();
+                    } else {
+                        String errorMsg = task.getException().getMessage();
+                        Toast.makeText(RegisterActivity.this, "Failed : "+ errorMsg, Toast.LENGTH_SHORT).show();
+                        loading.dismiss();
+                    }
+                }
+            });
+
     }
 
     private void sendUserToMainActivity() {
