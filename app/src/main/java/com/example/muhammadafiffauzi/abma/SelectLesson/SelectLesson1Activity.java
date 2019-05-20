@@ -44,9 +44,13 @@ public class SelectLesson1Activity extends AppCompatActivity {
         btnQuest1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SelectLesson1Activity.this, Quest1Lesson1Activity.class);
-                startActivity(intent);
+                sendUserToQuest1();
             }
         });
+    }
+
+    private void sendUserToQuest1() {
+        Intent intent = new Intent(SelectLesson1Activity.this, Quest1Lesson1Activity.class);
+        startActivity(intent);
     }
 }

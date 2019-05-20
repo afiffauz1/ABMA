@@ -25,9 +25,13 @@ public class LevelListActivity extends AppCompatActivity {
         btnLesson1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LevelListActivity.this, SelectLesson1Activity.class);
-                startActivity(intent);
+                sendUserToLesson1();
             }
         });
+    }
+
+    private void sendUserToLesson1() {
+        Intent intent = new Intent(LevelListActivity.this, SelectLesson1Activity.class);
+        startActivity(intent);
     }
 }

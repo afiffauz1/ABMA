@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent start = new Intent(MainActivity.this, LevelListActivity.class);
-                startActivity(start);
+                sendUserToLevelActivity();
             }
         });
 
@@ -125,5 +124,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void sendUserToLevelActivity(){
+        Intent start = new Intent(MainActivity.this, LevelListActivity.class);
+        startActivity(start);
     }
 }

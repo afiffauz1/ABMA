@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity {
 
     private Button btnSubmit;
-    private EditText userEmail, userPassword, userName;
+    private EditText userEmail, userPassword;
     private ProgressDialog loading;
 
     private FirebaseAuth mAuth;
