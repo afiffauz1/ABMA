@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ABMA</string>
+    <string name="permission_explanation">To save an image, the app requires permission to write to external storage</string>
+
 </resources>

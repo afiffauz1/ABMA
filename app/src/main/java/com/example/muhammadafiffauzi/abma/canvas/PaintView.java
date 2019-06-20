@@ -13,12 +13,14 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.muhammadafiffauzi.abma.R;
 
@@ -103,6 +105,7 @@ public class PaintView extends View {
         paths.clear();
         normal();
         invalidate();
+
     }
 
     @Override
@@ -169,4 +172,5 @@ public class PaintView extends View {
         invalidate();
         return true;
     }
+
 }
