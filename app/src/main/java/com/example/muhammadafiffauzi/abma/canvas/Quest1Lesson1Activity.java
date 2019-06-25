@@ -111,10 +111,15 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
     }
 
     private void comparisonImg() {
-        System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
+        paintView.setDrawingCacheEnabled(true);
+        Bitmap usrImg = Bitmap.createBitmap(paintView.getDrawingCache());
+        usrImg = Bitmap.createScaledBitmap(usrImg, 200, 200, true);
 
-        String imgPath1 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "test.jpg";
-        Mat path1 = Imgcodecs.imread(imgPath1, Imgcodecs.CV_LOAD_IMAGE_COLOR);
+        if (usrImg != null){
+            Toast.makeText(Quest1Lesson1Activity.this, "alhamdulillah", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(Quest1Lesson1Activity.this, "astagfirullah", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private String getPath(Uri imgPath1) {
@@ -143,15 +148,15 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
 
     private void saveImgQ1L1() {
 
-            paintView.setDrawingCacheEnabled(true);
-            String imgSaved = MediaStore.Images.Media.insertImage(getContentResolver(), paintView.getDrawingCache(), "quest1.jpg", "quest1result");
+        paintView.setDrawingCacheEnabled(true);
+        String imgSaved = MediaStore.Images.Media.insertImage(getContentResolver(), paintView.getDrawingCache(), "quest1.jpg", "quest1result");
 
-            if (imgSaved != null){
-                Toast.makeText(Quest1Lesson1Activity.this, "Yay its saved", Toast.LENGTH_SHORT).show();
+        if (imgSaved != null){
+            Toast.makeText(Quest1Lesson1Activity.this, "Yay its saved", Toast.LENGTH_SHORT).show();
         } else {
-                Toast.makeText(Quest1Lesson1Activity.this, "oh damn it!!", Toast.LENGTH_SHORT).show();
-            }
-            paintView.destroyDrawingCache();
+            Toast.makeText(Quest1Lesson1Activity.this, "oh damn it!!", Toast.LENGTH_SHORT).show();
+        }
+        paintView.destroyDrawingCache();
     }
 
 }
