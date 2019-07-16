@@ -7,8 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.muhammadafiffauzi.abma.LevelListActivity;
 import com.example.muhammadafiffauzi.abma.R;
-import com.example.muhammadafiffauzi.abma.canvas.Quest1Lesson1Activity;
+import com.example.muhammadafiffauzi.abma.questions.Quest1Lesson1Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,7 +22,6 @@ public class SelectLesson1Activity extends AppCompatActivity {
     private String currentUserId;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-
 
 
     @Override
@@ -47,10 +47,28 @@ public class SelectLesson1Activity extends AppCompatActivity {
                 sendUserToQuest1();
             }
         });
+        btnQuest2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendUserToQuest2();
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(SelectLesson1Activity.this, LevelListActivity.class);
+        startActivity(intent);
     }
 
     private void sendUserToQuest1() {
         Intent intent = new Intent(SelectLesson1Activity.this, Quest1Lesson1Activity.class);
+        startActivity(intent);
+    }
+
+    private void sendUserToQuest2() {
+        Intent intent = new Intent(SelectLesson1Activity.this, Quest2Lesson1Activity.class);
         startActivity(intent);
     }
 }

@@ -4,27 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".questions.Quest1Lesson1Activity">
-
-
+    tools:context=".SelectLesson.Quest2Lesson1Activity">
 
     <ImageView
         android:id="@+id/lvl1quest1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/lvl1quest1"
+        android:src="@drawable/lvl1quest2"
         />
 
     <com.example.muhammadafiffauzi.abma.canvas.PaintView
 
-        android:id="@+id/canvas"
+        android:id="@+id/canvas2"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginTop="8dp"
         android:layout_below="@id/lvl1quest1" />
 
     <Button
-        android:id="@+id/btn_ok"
+        android:id="@+id/btnOk2"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
@@ -38,7 +36,7 @@
         />
 
     <Button
-        android:id="@+id/btn_clear"
+        android:id="@+id/btnClear2"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
@@ -49,4 +47,5 @@
         android:textColor="#ffffff"
         android:textSize="20dp"
         />
+
 </RelativeLayout>

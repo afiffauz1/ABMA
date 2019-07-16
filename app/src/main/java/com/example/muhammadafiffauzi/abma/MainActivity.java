@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
 
                 if (!dataSnapshot.child("name").exists()) {
                     sendUserToAccountMenu();
-
                 }
             }
 
@@ -129,5 +128,11 @@ public class MainActivity extends AppCompatActivity {
     private void sendUserToLevelActivity(){
         Intent start = new Intent(MainActivity.this, LevelListActivity.class);
         startActivity(start);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+        finish();
     }
 }

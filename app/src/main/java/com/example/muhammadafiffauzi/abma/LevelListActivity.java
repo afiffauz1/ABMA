@@ -34,4 +34,13 @@ public class LevelListActivity extends AppCompatActivity {
         Intent intent = new Intent(LevelListActivity.this, SelectLesson1Activity.class);
         startActivity(intent);
     }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(LevelListActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+
 }
