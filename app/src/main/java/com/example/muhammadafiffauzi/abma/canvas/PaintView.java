@@ -32,10 +32,8 @@ public class PaintView extends View {
 
 
 
-    public static int BRUSH_SIZE = 20;
-    public static final int DEFAULT_COLOR = Color.BLACK;
-
-
+    public static int BRUSH_SIZE = 19; //ukuran brush
+    public static final int DEFAULT_COLOR = Color.BLACK; //brush color
 
     public static final int DEFAULT_BG_COLOR = Color.WHITE;
     private static float TOUCH_TOLERANCE = 4;

@@ -121,23 +121,6 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
         btnOk = (Button) findViewById(R.id.btn_ok);
         btnClear = (Button) findViewById(R.id.btn_clear);
 
-        //permission of write in to local storage
-        if (paintView.getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            if(shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-                AlertDialog.Builder dialog = new AlertDialog.Builder(Quest1Lesson1Activity.this);
-                dialog.setMessage(R.string.permission_explanation);
-                dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, SAVE_IMAGE_PERMISSION_REQUEST_CODE);
-                    }
-                });
-                dialog.create().show();
-            } else {
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, SAVE_IMAGE_PERMISSION_REQUEST_CODE);
-            }
-        }
-
 
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,7 +133,6 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //saveImgQ1L1();
                 compareImg();
                 paintView.clear();
                 //sendUserToLesson1Activity();
@@ -192,7 +174,6 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
         extractor.compute(img1, keypoints1, descriptors1);
 
         //second image
-        // Mat img2 = Imgcodecs.imread(path2);
         Mat descriptors2 = new Mat();
         MatOfKeyPoint keypoints2 = new MatOfKeyPoint();
         detector.detect(img2, keypoints2);
@@ -203,78 +184,49 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
         MatOfDMatch matches = new MatOfDMatch();
         matcher.match(descriptors1,descriptors2,matches);
 
-        // Filter matches by distance
-        MatOfDMatch filtered = filterMatchesByDistance(matches);
+        int total = (int) matches.size().height + (int) matches.size().width;
 
-        int total = (int) matches.size().height;
-        int Match= (int) filtered.size().height;
-        Log.d("LOG", "total:" + total + " Match:" + Match);
+        int tingkat10 = 100;
+        int tingkat9 = 90;
+        int tingkat8 = 80;
+        int tingkat7 = 70;
+        int tingkat6 = 60;
+        int tingkat5 = 50;
+        int tingkat4 = 40;
+        int tingkat3 = 30;
+        int tingkat2 = 20;
+        int tingkat1 = 10;
 
-        Toast.makeText(Quest1Lesson1Activity.this, "kecocokan : " +total+" || "+Match , Toast.LENGTH_LONG).show();
+        if (total >= 490){
+            Toast.makeText(Quest1Lesson1Activity.this, "score : " + tingkat10 , Toast.LENGTH_SHORT).show();
+        } else if (total >= 486 && total <= 489) {
+            Toast.makeText(Quest1Lesson1Activity.this, "score : " + tingkat9 , Toast.LENGTH_SHORT).show();
+        } else if (total >= 482 && total <= 485) {
+            Toast.makeText(Quest1Lesson1Activity.this, "score : " + tingkat8 , Toast.LENGTH_SHORT).show();
+        } else if (total >= 478 && total <= 481) {
+            Toast.makeText(Quest1Lesson1Activity.this, "score : " + tingkat7 , Toast.LENGTH_SHORT).show();
+        } else if (total >= 474 && total <= 477) {
+            Toast.makeText(Quest1Lesson1Activity.this, "score : " + tingkat6 , Toast.LENGTH_SHORT).show();
+        } else if (total >= 470 && total <= 473){
+            Toast.makeText(Quest1Lesson1Activity.this, "score : " + tingkat5 , Toast.LENGTH_SHORT).show();
+        } else if (total >= 466 && total <= 469){
+            Toast.makeText(Quest1Lesson1Activity.this, "score : " + tingkat4 , Toast.LENGTH_SHORT).show();
+        } else if (total >= 462 && total <= 465){
+            Toast.makeText(Quest1Lesson1Activity.this, "score : " + tingkat3 , Toast.LENGTH_SHORT).show();
+        } else if (total >= 458 && total <= 461){
+            Toast.makeText(Quest1Lesson1Activity.this, "score : " + tingkat2 , Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(Quest1Lesson1Activity.this, "score : " + tingkat1 , Toast.LENGTH_SHORT).show();
+        }
+
+        Toast.makeText(Quest1Lesson1Activity.this, "kecocokan : " +total , Toast.LENGTH_SHORT).show();
         paintView.destroyDrawingCache();
     }
-
-    static MatOfDMatch filterMatchesByDistance(MatOfDMatch matches) {
-        List<DMatch> matches_original = matches.toList();
-        List<DMatch> matches_filtered = new ArrayList<DMatch>();
-
-        int DIST_LIMIT = 30;
-        // Check all the matches distance and if it passes add to list of filtered matches
-        Log.d("DISTFILTER", "ORG SIZE:" + matches_original.size() + "");
-        for (int i = 0; i < matches_original.size(); i++) {
-            DMatch d = matches_original.get(i);
-            if (Math.abs(d.distance) <= DIST_LIMIT) {
-                matches_filtered.add(d);
-            }
-        }
-        Log.d("DISTFILTER", "FIL SIZE:" + matches_filtered.size() + "");
-
-        MatOfDMatch mat = new MatOfDMatch();
-        mat.fromList(matches_filtered);
-        return mat;
-    }
-
 
     private void sendUserToLesson1Activity() {
         Intent intent = new Intent(Quest1Lesson1Activity.this, SelectLesson1Activity.class);
         startActivity(intent);
         finish();
     }
-
-//    private void saveImgQ1L1() {
-//
-//        paintView.setDrawingCacheEnabled(true);
-//        paintView.buildDrawingCache();
-//        Bitmap mBitmap = paintView.getDrawingCache();
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-//        byte[] data = baos.toByteArray();
-//
-////        String imgSaved = MediaStore.Images.Media.insertImage(getContentResolver(), paintView.getDrawingCache(), "quest1.jpg", "quest1result");
-//
-//
-//        final StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("lesson1/Q1L1");
-//
-//        UploadTask uploadTask = mStorage.putBytes(data);
-//        uploadTask.addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(Quest1Lesson1Activity.this,"astagfirullah" , Toast.LENGTH_LONG).show();
-//            }
-//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                mStorage.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Uri> task) {
-//                        Toast.makeText(Quest1Lesson1Activity.this,"alhamdulillah" , Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//            }
-//        });
-//
-//        paintView.destroyDrawingCache();
-//
-//    }
 
 }
