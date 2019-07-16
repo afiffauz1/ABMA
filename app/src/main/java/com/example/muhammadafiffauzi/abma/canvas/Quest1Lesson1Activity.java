@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,7 +55,15 @@ import org.opencv.imgproc.Imgproc;
 
 import com.example.muhammadafiffauzi.abma.R;
 import com.example.muhammadafiffauzi.abma.SelectLesson.SelectLesson1Activity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Array;
@@ -142,8 +151,8 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //saveImgQ1L1();
-                paintView.clear();
                 compareImg();
+                paintView.clear();
                 //sendUserToLesson1Activity();
 
             }
@@ -153,16 +162,25 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
 
     private void compareImg() {
 
-        Bitmap imgTemplate = BitmapFactory.decodeResource(getResources(), R.drawable.lvl1quest1);
-        imgTemplate = Bitmap.createScaledBitmap(imgTemplate, 600, 300, true);
-        Mat img1 = new Mat(imgTemplate.getWidth(), imgTemplate.getHeight(), CvType.CV_8UC3);
-        Utils.bitmapToMat(imgTemplate, img1);
-
         paintView.setDrawingCacheEnabled(true);
+        paintView.buildDrawingCache(true);
         Bitmap usrImg = Bitmap.createBitmap(paintView.getDrawingCache());
-        usrImg = Bitmap.createScaledBitmap(usrImg, 600, 300, true);
-        Mat img2 = new Mat(usrImg.getWidth(), usrImg.getHeight(), CvType.CV_8UC3);
-        Utils.bitmapToMat(usrImg, img2);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        usrImg.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+
+        int usrImgHeight = usrImg.getHeight();
+        int usrImgWidth = usrImg.getWidth();
+        usrImg = Bitmap.createScaledBitmap(usrImg, usrImgWidth, usrImgHeight, true);
+        Mat img1 = new Mat(usrImgWidth, usrImgHeight, CvType.CV_8UC3);
+        Utils.bitmapToMat(usrImg, img1);
+
+        Bitmap imgTemplate = BitmapFactory.decodeResource(getResources(), R.drawable.lvl1quest1);
+        int imgTemplateHeight = imgTemplate.getHeight();
+        int imgTemplateWidth = imgTemplate.getWidth();
+        imgTemplate = Bitmap.createScaledBitmap(imgTemplate, imgTemplateWidth, imgTemplateHeight, true);
+        Mat img2 = new Mat(imgTemplate.getWidth(), imgTemplate.getHeight(), CvType.CV_8UC3);
+        Utils.bitmapToMat(imgTemplate, img2);
 
         FeatureDetector detector = FeatureDetector.create(FeatureDetector.ORB);
         DescriptorExtractor extractor = DescriptorExtractor.create(DescriptorExtractor.BRISK);
@@ -193,7 +211,7 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
         Log.d("LOG", "total:" + total + " Match:" + Match);
 
         Toast.makeText(Quest1Lesson1Activity.this, "kecocokan : " +total+" || "+Match , Toast.LENGTH_LONG).show();
-
+        paintView.destroyDrawingCache();
     }
 
     static MatOfDMatch filterMatchesByDistance(MatOfDMatch matches) {
@@ -226,8 +244,37 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
 //    private void saveImgQ1L1() {
 //
 //        paintView.setDrawingCacheEnabled(true);
-//        String imgSaved = MediaStore.Images.Media.insertImage(getContentResolver(), paintView.getDrawingCache(), "quest1.jpg", "quest1result");
+//        paintView.buildDrawingCache();
+//        Bitmap mBitmap = paintView.getDrawingCache();
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//        byte[] data = baos.toByteArray();
+//
+////        String imgSaved = MediaStore.Images.Media.insertImage(getContentResolver(), paintView.getDrawingCache(), "quest1.jpg", "quest1result");
+//
+//
+//        final StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("lesson1/Q1L1");
+//
+//        UploadTask uploadTask = mStorage.putBytes(data);
+//        uploadTask.addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(Quest1Lesson1Activity.this,"astagfirullah" , Toast.LENGTH_LONG).show();
+//            }
+//        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                mStorage.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Uri> task) {
+//                        Toast.makeText(Quest1Lesson1Activity.this,"alhamdulillah" , Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//            }
+//        });
+//
 //        paintView.destroyDrawingCache();
+//
 //    }
 
 }

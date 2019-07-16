@@ -32,7 +32,7 @@ public class PaintView extends View {
 
 
 
-    public static int BRUSH_SIZE = 10;
+    public static int BRUSH_SIZE = 20;
     public static final int DEFAULT_COLOR = Color.BLACK;
 
 
