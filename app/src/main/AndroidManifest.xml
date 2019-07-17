@@ -26,7 +26,8 @@
         <activity android:name=".LevelListActivity" />
         <activity android:name=".SelectLesson.SelectLesson1Activity" />
         <activity android:name=".questions.Quest1Lesson1Activity" />
-        <activity android:name=".SelectLesson.Quest2Lesson1Activity"></activity>
+        <activity android:name=".questions.Quest2Lesson1Activity" />
+        <activity android:name=".questions.Quest3Lesson1Activity"></activity>
     </application>
 
 </manifest>

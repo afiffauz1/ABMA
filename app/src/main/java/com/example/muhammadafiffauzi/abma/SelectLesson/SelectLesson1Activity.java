@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.example.muhammadafiffauzi.abma.LevelListActivity;
 import com.example.muhammadafiffauzi.abma.R;
 import com.example.muhammadafiffauzi.abma.questions.Quest1Lesson1Activity;
+import com.example.muhammadafiffauzi.abma.questions.Quest2Lesson1Activity;
+import com.example.muhammadafiffauzi.abma.questions.Quest3Lesson1Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -53,6 +55,12 @@ public class SelectLesson1Activity extends AppCompatActivity {
                 sendUserToQuest2();
             }
         });
+        btnQuest3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendUserToQuest3();
+            }
+        });
     }
 
     @Override
@@ -69,6 +77,10 @@ public class SelectLesson1Activity extends AppCompatActivity {
 
     private void sendUserToQuest2() {
         Intent intent = new Intent(SelectLesson1Activity.this, Quest2Lesson1Activity.class);
+        startActivity(intent);
+    }
+    private void sendUserToQuest3() {
+        Intent intent = new Intent(SelectLesson1Activity.this, Quest3Lesson1Activity.class);
         startActivity(intent);
     }
 }

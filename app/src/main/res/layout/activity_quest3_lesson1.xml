@@ -7,22 +7,22 @@
     tools:context=".questions.Quest2Lesson1Activity">
 
     <ImageView
-        android:id="@+id/lvl1quest2"
+        android:id="@+id/lvl1quest3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/lvl1quest2"
+        android:src="@drawable/lvl1quest3"
         />
 
     <com.example.muhammadafiffauzi.abma.canvas.PaintView
 
-        android:id="@+id/canvas2"
+        android:id="@+id/canvas3"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginTop="8dp"
-        android:layout_below="@id/lvl1quest2" />
+        android:layout_below="@id/lvl1quest3" />
 
     <Button
-        android:id="@+id/btnOk2"
+        android:id="@+id/btnOk3"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
@@ -36,7 +36,7 @@
         />
 
     <Button
-        android:id="@+id/btnClear2"
+        android:id="@+id/btnClear3"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"

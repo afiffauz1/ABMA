@@ -1,4 +1,4 @@
-package com.example.muhammadafiffauzi.abma.SelectLesson;
+package com.example.muhammadafiffauzi.abma.questions;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,8 +12,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.muhammadafiffauzi.abma.R;
+import com.example.muhammadafiffauzi.abma.SelectLesson.SelectLesson1Activity;
 import com.example.muhammadafiffauzi.abma.canvas.PaintView;
-import com.example.muhammadafiffauzi.abma.questions.Quest1Lesson1Activity;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
