@@ -12,6 +12,8 @@ import com.example.muhammadafiffauzi.abma.R;
 import com.example.muhammadafiffauzi.abma.questions.Quest1Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest2Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest3Lesson1Activity;
+import com.example.muhammadafiffauzi.abma.questions.Quest4Lesson1Activity;
+import com.example.muhammadafiffauzi.abma.questions.Quest5Lesson1Activity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -61,6 +63,18 @@ public class SelectLesson1Activity extends AppCompatActivity {
                 sendUserToQuest3();
             }
         });
+        btnQuest4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendUserToQuest4();
+            }
+        });
+        btnQuest5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendUserToQuest5();
+            }
+        });
     }
 
     @Override
@@ -81,6 +95,14 @@ public class SelectLesson1Activity extends AppCompatActivity {
     }
     private void sendUserToQuest3() {
         Intent intent = new Intent(SelectLesson1Activity.this, Quest3Lesson1Activity.class);
+        startActivity(intent);
+    }
+    private void sendUserToQuest4() {
+        Intent intent = new Intent(SelectLesson1Activity.this, Quest4Lesson1Activity.class);
+        startActivity(intent);
+    }
+    private void sendUserToQuest5() {
+        Intent intent = new Intent(SelectLesson1Activity.this, Quest5Lesson1Activity.class);
         startActivity(intent);
     }
 }

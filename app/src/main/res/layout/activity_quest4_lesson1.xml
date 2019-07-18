@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".questions.Quest2Lesson1Activity">
+
+    <ImageView
+        android:id="@+id/lvl1quest4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/lvl1quest4"
+        />
+
+    <com.example.muhammadafiffauzi.abma.canvas.PaintView
+
+        android:id="@+id/canvas4"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/lvl1quest4" />
+
+    <Button
+        android:id="@+id/btnOk4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:text="OK"
+        android:background="@drawable/button_solid_green"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        />
+
+    <Button
+        android:id="@+id/btnClear4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="X"
+        android:background="@drawable/button_solid"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+        />
+
+</RelativeLayout>
