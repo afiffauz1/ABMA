@@ -92,7 +92,7 @@ public class SelectLesson1Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 Integer totalScore = 0;
-                
+
             }
 
             @Override
