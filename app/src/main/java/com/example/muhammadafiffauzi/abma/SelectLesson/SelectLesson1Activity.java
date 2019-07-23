@@ -1,13 +1,16 @@
 package com.example.muhammadafiffauzi.abma.SelectLesson;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.muhammadafiffauzi.abma.LevelListActivity;
+import com.example.muhammadafiffauzi.abma.Model.Question1Model;
 import com.example.muhammadafiffauzi.abma.R;
 import com.example.muhammadafiffauzi.abma.questions.Quest1Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest2Lesson1Activity;
@@ -15,8 +18,13 @@ import com.example.muhammadafiffauzi.abma.questions.Quest3Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest4Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest5Lesson1Activity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class SelectLesson1Activity extends AppCompatActivity {
 
@@ -25,7 +33,10 @@ public class SelectLesson1Activity extends AppCompatActivity {
 
     private String currentUserId;
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
+    private DatabaseReference lesson1Database;
+
+    ArrayList<Question1Model> arrayList =  new ArrayList<Question1Model>();
+    ArrayAdapter<String> arrayAdapter;
 
 
     @Override
@@ -41,9 +52,9 @@ public class SelectLesson1Activity extends AppCompatActivity {
 
         lesson1TotalScore = (TextView) findViewById(R.id.total_score);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
+        lesson1Database = FirebaseDatabase.getInstance().getReference("Question1").child(currentUserId);
 
         btnQuest1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +86,21 @@ public class SelectLesson1Activity extends AppCompatActivity {
                 sendUserToQuest5();
             }
         });
+
+        lesson1Database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                Integer totalScore = 0;
+                
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override

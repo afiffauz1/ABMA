@@ -1,4 +1,4 @@
-package com.example.muhammadafiffauzi.abma;
+package com.example.muhammadafiffauzi.abma.Model;
 
 public class User {
 
