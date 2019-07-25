@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.muhammadafiffauzi.abma.LevelListActivity;
 import com.example.muhammadafiffauzi.abma.Model.Question1Model;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class SelectLesson1Activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference lesson1Database;
 
-    ArrayList<Question1Model> arrayList =  new ArrayList<Question1Model>();
+    ArrayList<Question1Model> arrayList =  new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
 
 
@@ -87,13 +89,22 @@ public class SelectLesson1Activity extends AppCompatActivity {
             }
         });
 
+
         lesson1Database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                Integer totalScore = 0;
+                int total = 0;
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String score = ds.child("quest1Score").getValue(String.class);
+                    int value = Integer.valueOf(score);
+                    total += value;
+                }
+                String totalS = String.valueOf(total);
+                lesson1TotalScore.setText(totalS);
 
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
