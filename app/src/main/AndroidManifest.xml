@@ -29,7 +29,8 @@
         <activity android:name=".questions.Quest2Lesson1Activity" />
         <activity android:name=".questions.Quest3Lesson1Activity" />
         <activity android:name=".questions.Quest4Lesson1Activity" />
-        <activity android:name=".questions.Quest5Lesson1Activity"></activity>
+        <activity android:name=".questions.Quest5Lesson1Activity" />
+        <activity android:name=".ScoreActivity"></activity>
     </application>
 
 </manifest>

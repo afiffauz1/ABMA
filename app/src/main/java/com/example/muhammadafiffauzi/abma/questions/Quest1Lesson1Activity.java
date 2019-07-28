@@ -24,6 +24,7 @@ import org.opencv.features2d.FeatureDetector;
 
 import com.example.muhammadafiffauzi.abma.Model.Question1Model;
 import com.example.muhammadafiffauzi.abma.R;
+import com.example.muhammadafiffauzi.abma.ScoreActivity;
 import com.example.muhammadafiffauzi.abma.SelectLesson.SelectLesson1Activity;
 import com.example.muhammadafiffauzi.abma.canvas.PaintView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -101,7 +102,6 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
 
                 compareImg();
                 paintView.clear();
-                sendUserToLesson1Activity();
             }
         });
 
@@ -167,49 +167,60 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
         if (total >= 490){
 
             saveScore(quest1Id, tingkat10);
+            sendUserToScoreActivity(tingkat10);
 
         } else if (total >= 486 && total <= 489) {
 
             saveScore(quest1Id, tingkat9);
+            sendUserToScoreActivity(tingkat9);
 
         } else if (total >= 482 && total <= 485) {
 
             saveScore(quest1Id, tingkat8);
+            sendUserToScoreActivity(tingkat8);
 
         } else if (total >= 478 && total <= 481) {
 
             saveScore(quest1Id, tingkat7);
+            sendUserToScoreActivity(tingkat7);
 
         } else if (total >= 474 && total <= 477) {
 
             saveScore(quest1Id, tingkat6);
+            sendUserToScoreActivity(tingkat6);
 
         } else if (total >= 470 && total <= 473){
 
             saveScore(quest1Id, tingkat5);
+            sendUserToScoreActivity(tingkat5);
 
         } else if (total >= 466 && total <= 469){
 
             saveScore(quest1Id, tingkat4);
+            sendUserToScoreActivity(tingkat4);
 
         } else if (total >= 462 && total <= 465){
 
             saveScore(quest1Id, tingkat3);
+            sendUserToScoreActivity(tingkat3);
 
         } else if (total >= 458 && total <= 461){
 
             saveScore(quest1Id, tingkat2);
+            sendUserToScoreActivity(tingkat2);
 
         }else{
 
             saveScore(quest1Id, tingkat1);
+            sendUserToScoreActivity(tingkat1);
 
         }
         paintView.destroyDrawingCache();
     }
 
-    private void sendUserToLesson1Activity() {
-        Intent intent = new Intent(Quest1Lesson1Activity.this, SelectLesson1Activity.class);
+    private void sendUserToScoreActivity(String score) {
+        Intent intent = new Intent(Quest1Lesson1Activity.this, ScoreActivity.class);
+        intent.putExtra("score", score);
         startActivity(intent);
     }
 
@@ -224,4 +235,6 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
         mDatabase.child(id).setValue(question1Model);
 
     }
+
+
 }
