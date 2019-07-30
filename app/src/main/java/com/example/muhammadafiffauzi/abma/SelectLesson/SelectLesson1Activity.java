@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.muhammadafiffauzi.abma.HighscoreActivity;
 import com.example.muhammadafiffauzi.abma.LevelListActivity;
 import com.example.muhammadafiffauzi.abma.Model.Question1Model;
 import com.example.muhammadafiffauzi.abma.R;
@@ -23,7 +23,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -31,14 +30,14 @@ import java.util.ArrayList;
 public class SelectLesson1Activity extends AppCompatActivity {
 
     private Button btnQuest1, btnQuest2, btnQuest3, btnQuest4, btnQuest5;
-//    private TextView lesson1TotalScore;
-//
-//    private String currentUserId;
-//    private FirebaseAuth mAuth;
-//    private DatabaseReference lesson1Database;
-//
-//    ArrayList<Question1Model> arrayList =  new ArrayList<>();
-//    ArrayAdapter<String> arrayAdapter;
+    //private TextView lesson1TotalScore;
+
+    private String currentUserId;
+    private FirebaseAuth mAuth;
+    private DatabaseReference lesson1Database;
+
+    ArrayList<Question1Model> arrayList =  new ArrayList<>();
+    ArrayAdapter<String> arrayAdapter;
 
 
     @Override
@@ -52,11 +51,9 @@ public class SelectLesson1Activity extends AppCompatActivity {
         btnQuest4 = (Button) findViewById(R.id.question4);
         btnQuest5 = (Button) findViewById(R.id.question5);
 
-//        lesson1TotalScore = (TextView) findViewById(R.id.total_score);
-//
-//        mAuth = FirebaseAuth.getInstance();
-//        currentUserId = mAuth.getCurrentUser().getUid();
-//        lesson1Database = FirebaseDatabase.getInstance().getReference("Question1").child(currentUserId);
+        mAuth = FirebaseAuth.getInstance();
+        currentUserId = mAuth.getCurrentUser().getUid();
+        lesson1Database = FirebaseDatabase.getInstance().getReference("Question1").child(currentUserId);
 
         btnQuest1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,27 +87,26 @@ public class SelectLesson1Activity extends AppCompatActivity {
         });
 
 
-//        lesson1Database.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                int total = 0;
-//                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                    String score = ds.child("quest1Score").getValue(String.class);
-//                    int value = Integer.valueOf(score);
-//                    total += value;
-//                }
-//                String totalS = String.valueOf(total);
-//                lesson1TotalScore.setText(totalS);
-//
-//            }
-//
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
+        lesson1Database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                int total = 0;
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String score = ds.child("quest1Score").getValue(String.class);
+                    int value = Integer.valueOf(score);
+                    total += value;
+                }
+                String totalS = String.valueOf(total);
+                Toast.makeText(SelectLesson1Activity.this, totalS, Toast.LENGTH_SHORT).show();
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    private Button btn_start;
+    private Button btn_start, btnHS;
 
     private DatabaseReference userDetail;
 
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btn_start = (Button) findViewById(R.id.btn_start);
-
+        btnHS = (Button) findViewById(R.id.btn_highscore);
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -51,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sendUserToLevelActivity();
+            }
+        });
+
+        btnHS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendUserToHighscoreActivity();
             }
         });
 
@@ -128,6 +135,11 @@ public class MainActivity extends AppCompatActivity {
     private void sendUserToLevelActivity(){
         Intent start = new Intent(MainActivity.this, LevelListActivity.class);
         startActivity(start);
+    }
+
+    private void sendUserToHighscoreActivity(){
+        Intent intent = new Intent(MainActivity.this, HighscoreActivity.class);
+        startActivity(intent);
     }
 
     @Override
