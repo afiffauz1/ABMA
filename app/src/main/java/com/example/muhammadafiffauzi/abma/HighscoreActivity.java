@@ -4,12 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HighscoreActivity extends AppCompatActivity {
 
     private TextView highScoreTV;
     private Button btnToLeaderBoard;
-    private String score;
+    private String ls1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

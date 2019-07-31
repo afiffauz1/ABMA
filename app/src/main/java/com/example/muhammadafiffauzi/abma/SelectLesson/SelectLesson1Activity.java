@@ -13,6 +13,7 @@ import com.example.muhammadafiffauzi.abma.HighscoreActivity;
 import com.example.muhammadafiffauzi.abma.LevelListActivity;
 import com.example.muhammadafiffauzi.abma.Model.Question1Model;
 import com.example.muhammadafiffauzi.abma.R;
+import com.example.muhammadafiffauzi.abma.ScoreActivity;
 import com.example.muhammadafiffauzi.abma.questions.Quest1Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest2Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest3Lesson1Activity;
@@ -32,9 +33,9 @@ public class SelectLesson1Activity extends AppCompatActivity {
     private Button btnQuest1, btnQuest2, btnQuest3, btnQuest4, btnQuest5;
     //private TextView lesson1TotalScore;
 
-    private String currentUserId;
+    private String currentUserId, totalQ1, totalQ2;
     private FirebaseAuth mAuth;
-    private DatabaseReference lesson1Database;
+    private DatabaseReference lesson1Database, lesson2Database;
 
     ArrayList<Question1Model> arrayList =  new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
@@ -53,7 +54,9 @@ public class SelectLesson1Activity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
+
         lesson1Database = FirebaseDatabase.getInstance().getReference("Question1").child(currentUserId);
+        lesson2Database = FirebaseDatabase.getInstance().getReference("Question2").child(currentUserId);
 
         btnQuest1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,10 +100,31 @@ public class SelectLesson1Activity extends AppCompatActivity {
                     int value = Integer.valueOf(score);
                     total += value;
                 }
-                String totalS = String.valueOf(total);
-                Toast.makeText(SelectLesson1Activity.this, totalS, Toast.LENGTH_SHORT).show();
+
+                totalQ1 = String.valueOf(total);
+                Toast.makeText(SelectLesson1Activity.this, totalQ1, Toast.LENGTH_SHORT).show();
             }
 
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        lesson2Database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int total = 0;
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String score = ds.child("quest2Score").getValue(String.class);
+                    int value = Integer.valueOf(score);
+                    total += value;
+                }
+
+                totalQ2 = String.valueOf(total);
+                Toast.makeText(SelectLesson1Activity.this, totalQ2, Toast.LENGTH_SHORT).show();
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -138,4 +162,5 @@ public class SelectLesson1Activity extends AppCompatActivity {
         Intent intent = new Intent(SelectLesson1Activity.this, Quest5Lesson1Activity.class);
         startActivity(intent);
     }
+
 }
