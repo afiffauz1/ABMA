@@ -11,7 +11,9 @@ import android.widget.Toast;
 
 import com.example.muhammadafiffauzi.abma.HighscoreActivity;
 import com.example.muhammadafiffauzi.abma.LevelListActivity;
+import com.example.muhammadafiffauzi.abma.Model.Lesson1;
 import com.example.muhammadafiffauzi.abma.Model.Question1Model;
+import com.example.muhammadafiffauzi.abma.Model.QuestionTotalScore;
 import com.example.muhammadafiffauzi.abma.R;
 import com.example.muhammadafiffauzi.abma.ScoreActivity;
 import com.example.muhammadafiffauzi.abma.questions.Quest1Lesson1Activity;
@@ -19,6 +21,8 @@ import com.example.muhammadafiffauzi.abma.questions.Quest2Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest3Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest4Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest5Lesson1Activity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,15 +31,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SelectLesson1Activity extends AppCompatActivity {
 
     private Button btnQuest1, btnQuest2, btnQuest3, btnQuest4, btnQuest5;
     //private TextView lesson1TotalScore;
 
-    private String currentUserId, totalQ1, totalQ2;
+    private String currentUserId;
     private FirebaseAuth mAuth;
-    private DatabaseReference lesson1Database, lesson2Database;
+    private DatabaseReference lesson1Database, lesson2Database, mDatabase;
 
     ArrayList<Question1Model> arrayList =  new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
@@ -57,6 +62,8 @@ public class SelectLesson1Activity extends AppCompatActivity {
 
         lesson1Database = FirebaseDatabase.getInstance().getReference("Question1").child(currentUserId);
         lesson2Database = FirebaseDatabase.getInstance().getReference("Question2").child(currentUserId);
+        mDatabase = FirebaseDatabase.getInstance().getReference("Lesson1HS").child(currentUserId);
+
 
         btnQuest1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +96,6 @@ public class SelectLesson1Activity extends AppCompatActivity {
             }
         });
 
-
         lesson1Database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -101,10 +107,12 @@ public class SelectLesson1Activity extends AppCompatActivity {
                     total += value;
                 }
 
-                totalQ1 = String.valueOf(total);
-                Toast.makeText(SelectLesson1Activity.this, totalQ1, Toast.LENGTH_SHORT).show();
-            }
+                String totalQ1 = String.valueOf(total);
 
+                QuestionTotalScore questionTotalScore = new QuestionTotalScore(totalQ1);
+
+                mDatabase.child("quest1TS").setValue(questionTotalScore);
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -121,9 +129,11 @@ public class SelectLesson1Activity extends AppCompatActivity {
                     int value = Integer.valueOf(score);
                     total += value;
                 }
+                String totalQ2 = String.valueOf(total);
 
-                totalQ2 = String.valueOf(total);
-                Toast.makeText(SelectLesson1Activity.this, totalQ2, Toast.LENGTH_SHORT).show();
+                QuestionTotalScore questionTotalScore = new QuestionTotalScore(totalQ2);
+
+                mDatabase.child("quest2TS").setValue(questionTotalScore);
             }
 
             @Override
@@ -162,5 +172,6 @@ public class SelectLesson1Activity extends AppCompatActivity {
         Intent intent = new Intent(SelectLesson1Activity.this, Quest5Lesson1Activity.class);
         startActivity(intent);
     }
+
 
 }
