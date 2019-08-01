@@ -40,7 +40,7 @@ public class SelectLesson1Activity extends AppCompatActivity {
 
     private String currentUserId;
     private FirebaseAuth mAuth;
-    private DatabaseReference lesson1Database, lesson2Database, mDatabase;
+    private DatabaseReference quest1Database, quest2Database, mDatabase;
 
     ArrayList<Question1Model> arrayList =  new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
@@ -60,8 +60,8 @@ public class SelectLesson1Activity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
 
-        lesson1Database = FirebaseDatabase.getInstance().getReference("Question1").child(currentUserId);
-        lesson2Database = FirebaseDatabase.getInstance().getReference("Question2").child(currentUserId);
+        quest1Database = FirebaseDatabase.getInstance().getReference("Question1").child(currentUserId);
+        quest2Database = FirebaseDatabase.getInstance().getReference("Question2").child(currentUserId);
         mDatabase = FirebaseDatabase.getInstance().getReference("Lesson1HS").child(currentUserId);
 
 
@@ -96,7 +96,7 @@ public class SelectLesson1Activity extends AppCompatActivity {
             }
         });
 
-        lesson1Database.addValueEventListener(new ValueEventListener() {
+        quest1Database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -120,7 +120,7 @@ public class SelectLesson1Activity extends AppCompatActivity {
             }
         });
 
-        lesson2Database.addValueEventListener(new ValueEventListener() {
+        quest2Database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int total = 0;

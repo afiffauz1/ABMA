@@ -12,7 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.muhammadafiffauzi.abma.Model.Question2Model;
+import com.example.muhammadafiffauzi.abma.Model.Question3Model;
 import com.example.muhammadafiffauzi.abma.R;
+import com.example.muhammadafiffauzi.abma.ScoreActivity;
 import com.example.muhammadafiffauzi.abma.SelectLesson.SelectLesson1Activity;
 import com.example.muhammadafiffauzi.abma.canvas.PaintView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -88,7 +91,7 @@ public class Quest3Lesson1Activity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = mDatabase = FirebaseDatabase.getInstance().getReference("Question3").child(currentUserId);
 
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +105,6 @@ public class Quest3Lesson1Activity extends AppCompatActivity {
             public void onClick(View v) {
                 compareImg();
                 paintView.clear();
-                sendUserToLesson1Activity();
             }
         });
     }
@@ -161,154 +163,73 @@ public class Quest3Lesson1Activity extends AppCompatActivity {
         String tingkat2 = "20";
         String tingkat1 = "10";
 
+        String quest3Id = mDatabase.push().getKey();
+
         if (total >= 490){
 
-            mDatabase.child("Lesson1").child("Quest3").child(currentUserId).push().setValue(tingkat10).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(Quest3Lesson1Activity.this, "Yeyyyy" , Toast.LENGTH_SHORT).show();
-                    } else {
-                        String errorMsg = task.getException().toString();
-                        Toast.makeText(Quest3Lesson1Activity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            saveScore(quest3Id, tingkat10);
+            sendUserToScoreActivity(tingkat10);
 
         } else if (total >= 486 && total <= 489) {
 
-            mDatabase.child("Lesson1").child("Quest3").child(currentUserId).push().setValue(tingkat9).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(Quest3Lesson1Activity.this, "Yeyyyy" , Toast.LENGTH_SHORT).show();
-                    } else {
-                        String errorMsg = task.getException().toString();
-                        Toast.makeText(Quest3Lesson1Activity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            saveScore(quest3Id, tingkat9);
+            sendUserToScoreActivity(tingkat9);
 
         } else if (total >= 482 && total <= 485) {
 
-            mDatabase.child("Lesson1").child("Quest3").child(currentUserId).push().setValue(tingkat8).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(Quest3Lesson1Activity.this, "Yeyyyy" , Toast.LENGTH_SHORT).show();
-                    } else {
-                        String errorMsg = task.getException().toString();
-                        Toast.makeText(Quest3Lesson1Activity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            saveScore(quest3Id, tingkat8);
+            sendUserToScoreActivity(tingkat8);
 
         } else if (total >= 478 && total <= 481) {
 
-            mDatabase.child("Lesson1").child("Quest3").child(currentUserId).push().setValue(tingkat7).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(Quest3Lesson1Activity.this, "Yeyyyy" , Toast.LENGTH_SHORT).show();
-                    } else {
-                        String errorMsg = task.getException().toString();
-                        Toast.makeText(Quest3Lesson1Activity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            saveScore(quest3Id, tingkat7);
+            sendUserToScoreActivity(tingkat7);
 
         } else if (total >= 474 && total <= 477) {
 
-            mDatabase.child("Lesson1").child("Quest3").child(currentUserId).push().setValue(tingkat6).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(Quest3Lesson1Activity.this, "Yeyyyy" , Toast.LENGTH_SHORT).show();
-                    } else {
-                        String errorMsg = task.getException().toString();
-                        Toast.makeText(Quest3Lesson1Activity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            saveScore(quest3Id, tingkat6);
+            sendUserToScoreActivity(tingkat6);
 
         } else if (total >= 470 && total <= 473){
 
-            mDatabase.child("Lesson1").child("Quest3").child(currentUserId).push().setValue(tingkat5).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(Quest3Lesson1Activity.this, "Yeyyyy" , Toast.LENGTH_SHORT).show();
-                    } else {
-                        String errorMsg = task.getException().toString();
-                        Toast.makeText(Quest3Lesson1Activity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            saveScore(quest3Id, tingkat5);
+            sendUserToScoreActivity(tingkat5);
 
         } else if (total >= 466 && total <= 469){
 
-            mDatabase.child("Lesson1").child("Quest3").child(currentUserId).push().setValue(tingkat4).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(Quest3Lesson1Activity.this, "Yeyyyy" , Toast.LENGTH_SHORT).show();
-                    } else {
-                        String errorMsg = task.getException().toString();
-                        Toast.makeText(Quest3Lesson1Activity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            saveScore(quest3Id, tingkat4);
+            sendUserToScoreActivity(tingkat4);
 
         } else if (total >= 462 && total <= 465){
 
-            mDatabase.child("Lesson1").child("Quest3").child(currentUserId).push().setValue(tingkat3).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(Quest3Lesson1Activity.this, "Yeyyyy" , Toast.LENGTH_SHORT).show();
-                    } else {
-                        String errorMsg = task.getException().toString();
-                        Toast.makeText(Quest3Lesson1Activity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            saveScore(quest3Id, tingkat3);
+            sendUserToScoreActivity(tingkat3);
 
         } else if (total >= 458 && total <= 461){
 
-            mDatabase.child("Lesson1").child("Quest3").child(currentUserId).push().setValue(tingkat2).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(Quest3Lesson1Activity.this, "Yeyyyy" , Toast.LENGTH_SHORT).show();
-                    } else {
-                        String errorMsg = task.getException().toString();
-                        Toast.makeText(Quest3Lesson1Activity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            saveScore(quest3Id, tingkat2);
+            sendUserToScoreActivity(tingkat2);
 
         }else{
 
-            mDatabase.child("Lesson1").child("Quest3").child(currentUserId).push().setValue(tingkat1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(Quest3Lesson1Activity.this, "Yeyyyy" , Toast.LENGTH_SHORT).show();
-                    } else {
-                        String errorMsg = task.getException().toString();
-                        Toast.makeText(Quest3Lesson1Activity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            saveScore(quest3Id, tingkat1);
+            sendUserToScoreActivity(tingkat1);
 
         }
 
         paintView.destroyDrawingCache();
     }
 
-    private void sendUserToLesson1Activity() {
-        Intent intent = new Intent(Quest3Lesson1Activity.this, SelectLesson1Activity.class);
+    private void sendUserToScoreActivity(String score) {
+        Intent intent = new Intent(Quest3Lesson1Activity.this, ScoreActivity.class);
+        intent.putExtra("score", score);
         startActivity(intent);
+    }
+
+    private void saveScore(String id, String score){
+        Question3Model question3Model = new Question3Model(id, score);
+        mDatabase.child(id).setValue(question3Model);
+
     }
 
     @Override
