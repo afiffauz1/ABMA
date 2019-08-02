@@ -41,9 +41,18 @@ public class HighscoreActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 String scoreQ1 = dataSnapshot.child("quest1TS").child("questScore").getValue(String.class);
+                int q1 = Integer.valueOf(scoreQ1);
                 String scoreQ2 = dataSnapshot.child("quest2TS").child("questScore").getValue(String.class);
+                int q2 = Integer.valueOf(scoreQ2);
+                String scoreQ3 = dataSnapshot.child("quest3TS").child("questScore").getValue(String.class);
+                int q3 = Integer.valueOf(scoreQ3);
 
-//              Toast.makeText(HighscoreActivity.this, "quest2 : "+scoreQ2 , Toast.LENGTH_SHORT).show();
+                int lesson1HS = q1 + q2 + q3;
+                String s = String.valueOf(lesson1HS);
+
+                highScoreTV.setText(s);
+
+                Toast.makeText(HighscoreActivity.this, "hs : "+s , Toast.LENGTH_SHORT).show();
             }
 
             @Override
