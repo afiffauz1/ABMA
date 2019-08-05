@@ -46,6 +46,8 @@ public class HighscoreActivity extends AppCompatActivity {
                 int q2 = Integer.valueOf(scoreQ2);
                 String scoreQ3 = dataSnapshot.child("quest3TS").child("questScore").getValue(String.class);
                 int q3 = Integer.valueOf(scoreQ3);
+                String scoreQ4 = dataSnapshot.child("quest4TS").child("questScore").getValue(String.class);
+                int q4 = Integer.valueOf(scoreQ4);
 
                 int lesson1HS = q1 + q2 + q3;
                 String s = String.valueOf(lesson1HS);

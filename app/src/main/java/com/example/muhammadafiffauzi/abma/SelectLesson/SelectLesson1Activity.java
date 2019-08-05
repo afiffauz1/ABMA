@@ -40,7 +40,7 @@ public class SelectLesson1Activity extends AppCompatActivity {
 
     private String currentUserId;
     private FirebaseAuth mAuth;
-    private DatabaseReference quest1Database, quest2Database,quest3Database, mDatabase;
+    private DatabaseReference quest1Database, quest2Database,quest3Database, quest4Database, mDatabase;
 
     ArrayList<Question1Model> arrayList =  new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
@@ -63,6 +63,7 @@ public class SelectLesson1Activity extends AppCompatActivity {
         quest1Database = FirebaseDatabase.getInstance().getReference("Question1").child(currentUserId);
         quest2Database = FirebaseDatabase.getInstance().getReference("Question2").child(currentUserId);
         quest3Database = FirebaseDatabase.getInstance().getReference("Question3").child(currentUserId);
+        quest4Database = FirebaseDatabase.getInstance().getReference("Question4").child(currentUserId);
         mDatabase = FirebaseDatabase.getInstance().getReference("Lesson1HS").child(currentUserId);
 
 
@@ -157,6 +158,30 @@ public class SelectLesson1Activity extends AppCompatActivity {
                 QuestionTotalScore questionTotalScore = new QuestionTotalScore(totalQ2);
 
                 mDatabase.child("quest3TS").setValue(questionTotalScore);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        quest4Database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                int total = 0;
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String score = ds.child("quest4Score").getValue(String.class);
+                    int value = Integer.valueOf(score);
+                    total += value;
+                }
+
+                String totalQ1 = String.valueOf(total);
+
+                QuestionTotalScore questionTotalScore = new QuestionTotalScore(totalQ1);
+
+                mDatabase.child("quest4TS").setValue(questionTotalScore);
             }
 
             @Override
