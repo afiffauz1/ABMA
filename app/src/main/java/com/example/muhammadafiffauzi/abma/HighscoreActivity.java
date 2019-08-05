@@ -48,8 +48,10 @@ public class HighscoreActivity extends AppCompatActivity {
                 int q3 = Integer.valueOf(scoreQ3);
                 String scoreQ4 = dataSnapshot.child("quest4TS").child("questScore").getValue(String.class);
                 int q4 = Integer.valueOf(scoreQ4);
+                String scoreQ5 = dataSnapshot.child("quest5TS").child("questScore").getValue(String.class);
+                int q5 = Integer.valueOf(scoreQ5);
 
-                int lesson1HS = q1 + q2 + q3;
+                int lesson1HS = q1 + q2 + q3 + q4 + q5;
                 String s = String.valueOf(lesson1HS);
 
                 highScoreTV.setText(s);
