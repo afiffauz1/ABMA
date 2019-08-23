@@ -30,8 +30,12 @@ import com.example.muhammadafiffauzi.abma.canvas.PaintView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
 
 
 public class Quest1Lesson1Activity extends AppCompatActivity {
@@ -162,56 +166,60 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
         String tingkat2 = "20";
         String tingkat1 = "10";
 
-        String quest1Id = mDatabase.push().getKey();
+        String quest1Id = mDatabase.push().getKey(); //mendapatkan unique key untuk score
+
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String tanggal = dt.format(date);
 
         if (total >= 490){
 
-            saveScore(quest1Id, tingkat10);
+            saveScore(quest1Id, tingkat10, tanggal);
             sendUserToScoreActivity(tingkat10);
 
         } else if (total >= 486 && total <= 489) {
 
-            saveScore(quest1Id, tingkat9);
+            saveScore(quest1Id, tingkat9, tanggal);
             sendUserToScoreActivity(tingkat9);
 
         } else if (total >= 482 && total <= 485) {
 
-            saveScore(quest1Id, tingkat8);
+            saveScore(quest1Id, tingkat8, tanggal);
             sendUserToScoreActivity(tingkat8);
 
         } else if (total >= 478 && total <= 481) {
 
-            saveScore(quest1Id, tingkat7);
+            saveScore(quest1Id, tingkat7, tanggal);
             sendUserToScoreActivity(tingkat7);
 
         } else if (total >= 474 && total <= 477) {
 
-            saveScore(quest1Id, tingkat6);
+            saveScore(quest1Id, tingkat6, tanggal);
             sendUserToScoreActivity(tingkat6);
 
         } else if (total >= 470 && total <= 473){
 
-            saveScore(quest1Id, tingkat5);
+            saveScore(quest1Id, tingkat5, tanggal);
             sendUserToScoreActivity(tingkat5);
 
         } else if (total >= 466 && total <= 469){
 
-            saveScore(quest1Id, tingkat4);
+            saveScore(quest1Id, tingkat4, tanggal);
             sendUserToScoreActivity(tingkat4);
 
         } else if (total >= 462 && total <= 465){
 
-            saveScore(quest1Id, tingkat3);
+            saveScore(quest1Id, tingkat3, tanggal);
             sendUserToScoreActivity(tingkat3);
 
         } else if (total >= 458 && total <= 461){
 
-            saveScore(quest1Id, tingkat2);
+            saveScore(quest1Id, tingkat2, tanggal);
             sendUserToScoreActivity(tingkat2);
 
         }else{
 
-            saveScore(quest1Id, tingkat1);
+            saveScore(quest1Id, tingkat1, tanggal);
             sendUserToScoreActivity(tingkat1);
 
         }
@@ -230,8 +238,8 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
         finish();
     }
 
-    private void saveScore(String id, String score){
-        Question1Model question1Model = new Question1Model(id, score);
+    private void saveScore(String id, String score, String date){
+        Question1Model question1Model = new Question1Model(id, score, date);
         mDatabase.child(id).setValue(question1Model);
 
     }

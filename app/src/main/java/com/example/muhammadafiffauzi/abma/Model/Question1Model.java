@@ -3,18 +3,18 @@ package com.example.muhammadafiffauzi.abma.Model;
 import com.example.muhammadafiffauzi.abma.SelectLesson.SelectLesson1Activity;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Question1Model {
     private String idQuest1;
     private String quest1Score;
+    private String date;
 
-    public Question1Model(SelectLesson1Activity selectLesson1Activity, ArrayList<Question1Model> arrayList){
 
-    }
-
-    public Question1Model(String idQuest1, String quest1Score) {
+    public Question1Model(String idQuest1, String quest1Score, String date) {
         this.idQuest1 = idQuest1;
         this.quest1Score = quest1Score;
+        this.date = date;
     }
 
     public String getIdQuest1() {
@@ -31,5 +31,13 @@ public class Question1Model {
 
     public void setQuest1Score(String quest1Score) {
         this.quest1Score = quest1Score;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
