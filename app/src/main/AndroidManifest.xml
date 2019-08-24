@@ -32,7 +32,8 @@
         <activity android:name=".questions.Quest5Lesson1Activity" />
         <activity android:name=".ScoreActivity" />
         <activity android:name=".HighscoreActivity" />
-        <activity android:name=".HistoriActivity"></activity>
+        <activity android:name=".HistoriActivity" />
+        <activity android:name=".History.HistoriQ1L1"></activity>
     </application>
 
 </manifest>

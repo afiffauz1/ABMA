@@ -10,6 +10,9 @@ public class Question1Model {
     private String quest1Score;
     private String date;
 
+    public Question1Model() {
+
+    }
 
     public Question1Model(String idQuest1, String quest1Score, String date) {
         this.idQuest1 = idQuest1;
