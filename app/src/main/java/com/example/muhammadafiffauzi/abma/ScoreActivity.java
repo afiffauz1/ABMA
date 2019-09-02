@@ -10,11 +10,15 @@ import android.widget.TextView;
 import com.example.muhammadafiffauzi.abma.SelectLesson.SelectLesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest2Lesson1Activity;
 
+import org.w3c.dom.Text;
+
 public class ScoreActivity extends AppCompatActivity {
 
     private Button btnQuestion;
     private TextView scoreView;
     private String score;
+    private String scoreAlfa;
+    private TextView scoreAlfaView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +26,12 @@ public class ScoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_score);
 
         btnQuestion = (Button) findViewById(R.id.buttonQuestion);
-        scoreView = (TextView) findViewById(R.id.scoreView);
+        scoreView = (TextView) findViewById(R.id.scoreNum);
+        scoreAlfaView = (TextView) findViewById(R.id.scoreAlfa);
 
         Bundle extras = getIntent().getExtras();
-        score = extras.getString("score");
-        scoreView.setText(score);
+        scoreAlfaView.setText(extras.getString("scoreAlfa"));
+        scoreView.setText("Your Score : "+extras.getString("score"));
 
         btnQuestion.setOnClickListener(new View.OnClickListener() {
             @Override

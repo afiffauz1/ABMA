@@ -7,11 +7,11 @@
     tools:context=".ScoreActivity">
 
     <TextView
-        android:id="@+id/pesan"
+        android:id="@+id/scoreAlfa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Score"
-        android:textSize="30dp"
+        android:text="XX"
+        android:textSize="240dp"
         android:textStyle="bold"
         android:textColor="@color/colorAccent"
         android:layout_centerHorizontal="true"
@@ -19,23 +19,25 @@
         />
 
     <TextView
-        android:id="@+id/scoreView"
+        android:id="@+id/scoreNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="xxxxxxxxx"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:textSize="200dp"
-        android:text="0"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:layout_below="@id/pesan"/>
+        android:layout_below="@+id/scoreAlfa"
+        />
+
 
     <Button
         android:id="@+id/buttonQuestion"
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/scoreView"
+        android:layout_below="@id/scoreNum"
         android:layout_marginTop="20dp"
         android:text="PILIH PERTANYAAN"
         android:textSize="20dp"

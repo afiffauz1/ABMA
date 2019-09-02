@@ -9,15 +9,17 @@ public class Question1Model {
     private String idQuest1;
     private String quest1Score;
     private String date;
+    private String scoreAlfabet;
 
     public Question1Model() {
 
     }
 
-    public Question1Model(String idQuest1, String quest1Score, String date) {
+    public Question1Model(String idQuest1, String quest1Score, String date, String scoreAlfabet) {
         this.idQuest1 = idQuest1;
         this.quest1Score = quest1Score;
         this.date = date;
+        this.scoreAlfabet = scoreAlfabet;
     }
 
     public String getIdQuest1() {
@@ -43,4 +45,14 @@ public class Question1Model {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public String getScoreAlfabet() {
+        return scoreAlfabet;
+    }
+
+    public void setScoreAlfabet(String scoreAlfabet) {
+        this.scoreAlfabet = scoreAlfabet;
+    }
 }
+
+

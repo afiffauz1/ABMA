@@ -117,6 +117,28 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
         DescriptorExtractor extractor = DescriptorExtractor.create(DescriptorExtractor.BRISK);
         DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
 
+        String tingkat10 = "100";
+        String tingkat9 = "90";
+        String tingkat8 = "80";
+        String tingkat7 = "70";
+        String tingkat6 = "60";
+        String tingkat5 = "50";
+        String tingkat4 = "40";
+        String tingkat3 = "30";
+        String tingkat2 = "20";
+        String tingkat1 = "10";
+        String alfaA = "A";
+        String alfaB = "B";
+        String alfaC = "C";
+        String alfaD = "D";
+        String alfaE = "E";
+
+        String quest1Id = mDatabase.push().getKey(); //mendapatkan unique key untuk score
+
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String tanggal = dt.format(date);
+
         //inisialisasi gambar dari user dan merubahnya dari Bitmap ke format Mat
         paintView.setDrawingCacheEnabled(true);
         paintView.buildDrawingCache(true);
@@ -155,80 +177,68 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
 
         int total = (int) matches.size().height + (int) matches.size().width;
 
-        String tingkat10 = "100";
-        String tingkat9 = "90";
-        String tingkat8 = "80";
-        String tingkat7 = "70";
-        String tingkat6 = "60";
-        String tingkat5 = "50";
-        String tingkat4 = "40";
-        String tingkat3 = "30";
-        String tingkat2 = "20";
-        String tingkat1 = "10";
-
-        String quest1Id = mDatabase.push().getKey(); //mendapatkan unique key untuk score
-
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        String tanggal = dt.format(date);
 
         if (total >= 490){
 
-            saveScore(quest1Id, tingkat10, tanggal);
-            sendUserToScoreActivity(tingkat10);
+            saveScore(quest1Id, tingkat10, tanggal,alfaA);
+            sendUserToScoreActivity(tingkat10, alfaA);
 
         } else if (total >= 486 && total <= 489) {
 
-            saveScore(quest1Id, tingkat9, tanggal);
-            sendUserToScoreActivity(tingkat9);
+            saveScore(quest1Id, tingkat9, tanggal, alfaA);
+            sendUserToScoreActivity(tingkat9, alfaA);
 
         } else if (total >= 482 && total <= 485) {
 
-            saveScore(quest1Id, tingkat8, tanggal);
-            sendUserToScoreActivity(tingkat8);
+            saveScore(quest1Id, tingkat8, tanggal, alfaB);
+            sendUserToScoreActivity(tingkat8, alfaB);
 
         } else if (total >= 478 && total <= 481) {
 
-            saveScore(quest1Id, tingkat7, tanggal);
-            sendUserToScoreActivity(tingkat7);
+            saveScore(quest1Id, tingkat7, tanggal,alfaB);
+            sendUserToScoreActivity(tingkat7, alfaB);
 
         } else if (total >= 474 && total <= 477) {
 
-            saveScore(quest1Id, tingkat6, tanggal);
-            sendUserToScoreActivity(tingkat6);
+            saveScore(quest1Id, tingkat6, tanggal, alfaC);
+            sendUserToScoreActivity(tingkat6, alfaC);
 
         } else if (total >= 470 && total <= 473){
 
-            saveScore(quest1Id, tingkat5, tanggal);
-            sendUserToScoreActivity(tingkat5);
+            saveScore(quest1Id, tingkat5, tanggal, alfaC);
+            sendUserToScoreActivity(tingkat5, alfaC);
 
         } else if (total >= 466 && total <= 469){
 
-            saveScore(quest1Id, tingkat4, tanggal);
-            sendUserToScoreActivity(tingkat4);
+            saveScore(quest1Id, tingkat4, tanggal, alfaD);
+            sendUserToScoreActivity(tingkat4, alfaD);
 
         } else if (total >= 462 && total <= 465){
 
-            saveScore(quest1Id, tingkat3, tanggal);
-            sendUserToScoreActivity(tingkat3);
+            saveScore(quest1Id, tingkat3, tanggal, alfaD);
+            sendUserToScoreActivity(tingkat3, alfaD);
 
         } else if (total >= 458 && total <= 461){
 
-            saveScore(quest1Id, tingkat2, tanggal);
-            sendUserToScoreActivity(tingkat2);
+            saveScore(quest1Id, tingkat2, tanggal, alfaE);
+            sendUserToScoreActivity(tingkat2, alfaE);
 
         }else{
 
-            saveScore(quest1Id, tingkat1, tanggal);
-            sendUserToScoreActivity(tingkat1);
+            saveScore(quest1Id, tingkat1, tanggal, alfaE);
+            sendUserToScoreActivity(tingkat1, alfaE);
 
         }
         paintView.destroyDrawingCache();
     }
 
-    private void sendUserToScoreActivity(String score) {
+    private void sendUserToScoreActivity(String score, String scoreAlfa) {
+
+        Bundle bundle = new Bundle();
+        bundle.putString("score", score);
+        bundle.putString("scoreAlfa", scoreAlfa);
         Intent intent = new Intent(Quest1Lesson1Activity.this, ScoreActivity.class);
-        intent.putExtra("score", score);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -238,8 +248,8 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
         finish();
     }
 
-    private void saveScore(String id, String score, String date){
-        Question1Model question1Model = new Question1Model(id, score, date);
+    private void saveScore(String id, String score, String date, String scoreAlfabet){
+        Question1Model question1Model = new Question1Model(id, score, date, scoreAlfabet);
         mDatabase.child(id).setValue(question1Model);
 
     }
