@@ -7,10 +7,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.muhammadafiffauzi.abma.History.HistoriQ1L1;
+import com.example.muhammadafiffauzi.abma.History.HistoriQ2L1;
 
 public class HistoriActivity extends AppCompatActivity {
 
-    private TextView quest1Histori;
+    private TextView quest1Histori, quest2Histori;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +19,7 @@ public class HistoriActivity extends AppCompatActivity {
         setContentView(R.layout.activity_histori);
 
         quest1Histori = (TextView) findViewById(R.id.ls1q1);
+        quest2Histori = (TextView) findViewById(R.id.ls1q2);
 
         quest1Histori.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,5 +28,15 @@ public class HistoriActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        quest2Histori.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HistoriActivity.this, HistoriQ2L1.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 }
