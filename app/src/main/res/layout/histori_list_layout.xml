@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="170dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     app:cardCornerRadius="20dp"
@@ -11,10 +11,11 @@
     
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="170dp"
         android:orientation="vertical"
-        android:background="#FF5A5F"
+        android:background="#11998e"
         >
+
 
         <TextView
             android:id="@+id/card_title"
@@ -23,19 +24,31 @@
             android:text="Lesson 1"
             android:textSize="30dp"
             android:textStyle="bold"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:textAlignment="center"
             android:layout_marginTop="5dp"
+            />
+
+        <TextView
+            android:id="@+id/hisScoreAlfaView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="XXXXXXX"
+            android:textSize="20dp"
+            android:textColor="#fff"
             />
 
         <TextView
             android:id="@+id/hisScoreView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:text="XXXXXXX"
             android:textSize="20dp"
+            android:textColor="#fff"
             />
 
         <TextView
@@ -46,6 +59,7 @@
             android:layout_marginLeft="10dp"
             android:text="XXXX-XX-XX"
             android:textSize="20dp"
+            android:textColor="#fff"
             />
 
     </LinearLayout>

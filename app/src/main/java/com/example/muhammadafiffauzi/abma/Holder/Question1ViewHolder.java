@@ -10,12 +10,13 @@ import com.example.muhammadafiffauzi.abma.R;
 
 public class Question1ViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView scoreView, dateView;
+    public TextView scoreView, dateView, scoreAlfaView;
 
     public Question1ViewHolder(@NonNull View itemView){
         super(itemView);
 
         scoreView = itemView.findViewById(R.id.hisScoreView);
         dateView = itemView.findViewById(R.id.hisDateView);
+        scoreAlfaView = itemView.findViewById(R.id.hisScoreAlfaView);
     }
 }

@@ -65,8 +65,9 @@ public class HistoriQ1L1 extends AppCompatActivity {
         adapter = new FirebaseRecyclerAdapter<Question1Model, Question1ViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull Question1ViewHolder holder, int position, @NonNull Question1Model model) {
-                holder.scoreView.setText(model.getQuest1Score());
-                holder.dateView.setText(model.getDate());
+                holder.scoreView.setText("Overall Score : "+ model.getQuest1Score());
+                holder.dateView.setText("Date Play : "+ model.getDate());
+                holder.scoreAlfaView.setText("Score : "+model.getScoreAlfabet());
             }
 
             @NonNull
