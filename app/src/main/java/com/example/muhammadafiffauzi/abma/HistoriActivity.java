@@ -9,10 +9,12 @@ import android.widget.TextView;
 import com.example.muhammadafiffauzi.abma.History.HistoriQ1L1;
 import com.example.muhammadafiffauzi.abma.History.HistoriQ2L1;
 import com.example.muhammadafiffauzi.abma.History.HistoriQ3L1;
+import com.example.muhammadafiffauzi.abma.History.HistoriQ4L1;
+import com.example.muhammadafiffauzi.abma.History.HistoriQ5L1;
 
 public class HistoriActivity extends AppCompatActivity {
 
-    private TextView quest1Histori, quest2Histori, quest3Histori;
+    private TextView quest1Histori, quest2Histori, quest3Histori, quest4Histori, quest5Histori;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,8 @@ public class HistoriActivity extends AppCompatActivity {
         quest1Histori = (TextView) findViewById(R.id.ls1q1);
         quest2Histori = (TextView) findViewById(R.id.ls1q2);
         quest3Histori = (TextView) findViewById(R.id.ls1q3);
+        quest4Histori = (TextView) findViewById(R.id.ls1q4);
+        quest5Histori = (TextView) findViewById(R.id.ls1q5);
 
         quest1Histori.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +47,22 @@ public class HistoriActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HistoriActivity.this, HistoriQ3L1.class);
+                startActivity(intent);
+            }
+        });
+
+        quest4Histori.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HistoriActivity.this, HistoriQ4L1.class);
+                startActivity(intent);
+            }
+        });
+
+        quest5Histori.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HistoriActivity.this, HistoriQ5L1.class);
                 startActivity(intent);
             }
         });

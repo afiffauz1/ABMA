@@ -6,6 +6,8 @@ public class Question5Model {
     private String date;
     private String scoreAlfa;
 
+    public Question5Model(){}
+
     public Question5Model(String idQuest5, String quest5Score, String date, String scoreAlfa) {
         this.idQuest5 = idQuest5;
         this.quest5Score = quest5Score;
