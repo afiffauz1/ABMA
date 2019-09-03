@@ -34,7 +34,8 @@
         <activity android:name=".HighscoreActivity" />
         <activity android:name=".HistoriActivity" />
         <activity android:name=".History.HistoriQ1L1" />
-        <activity android:name=".History.HistoriQ2L1"></activity>
+        <activity android:name=".History.HistoriQ2L1" />
+        <activity android:name=".History.HistoriQ3L1"></activity>
     </application>
 
 </manifest>

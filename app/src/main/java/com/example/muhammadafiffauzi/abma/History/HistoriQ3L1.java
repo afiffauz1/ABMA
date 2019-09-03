@@ -8,9 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.example.muhammadafiffauzi.abma.Holder.Question2ViewHolder;
-import com.example.muhammadafiffauzi.abma.Model.Question1Model;
-import com.example.muhammadafiffauzi.abma.Model.Question2Model;
+import com.example.muhammadafiffauzi.abma.Holder.Question3ViewHolder;
+import com.example.muhammadafiffauzi.abma.Model.Question3Model;
 import com.example.muhammadafiffauzi.abma.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -18,18 +17,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-
-public class HistoriQ2L1 extends AppCompatActivity {
+public class HistoriQ3L1 extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+
+    private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private String currentUser;
-    private FirebaseAuth mAuth;
-    private ArrayList<Question2Model> arrayList;
 
-    private FirebaseRecyclerOptions<Question2Model> options;
-    private FirebaseRecyclerAdapter<Question2Model, Question2ViewHolder> adapter;
+    private FirebaseRecyclerOptions<Question3Model> options;
+    private FirebaseRecyclerAdapter<Question3Model, Question3ViewHolder> adapter;
 
     @Override
     protected void onStart() {
@@ -46,34 +43,31 @@ public class HistoriQ2L1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_histori_q2_l1);
+        setContentView(R.layout.activity_histori_q3_l1);
 
-        recyclerView = (RecyclerView) findViewById(R.id.myRV2);
+        recyclerView = (RecyclerView) findViewById(R.id.myRV3);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser().getUid();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Question2").child(currentUser);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Question3").child(currentUser);
         mDatabase.keepSynced(true);
 
-        arrayList = new ArrayList<Question2Model>();
+        options = new FirebaseRecyclerOptions.Builder<Question3Model>().setQuery(mDatabase, Question3Model.class).build();
 
-        options = new FirebaseRecyclerOptions.Builder<Question2Model>().setQuery(mDatabase, Question2Model.class).build();
-
-        adapter = new FirebaseRecyclerAdapter<Question2Model, Question2ViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Question3Model, Question3ViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull Question2ViewHolder holder, int position, @NonNull Question2Model model) {
-                holder.scoreAlfabet.setText("Score : "+model.getScoreAlfabet());
-                holder.scoreView.setText("Overall Score : "+model.getQuest2Score());
+            protected void onBindViewHolder(@NonNull Question3ViewHolder holder, int position, @NonNull Question3Model model) {
+                holder.scoreAlfabetView.setText("Score : "+model.getScoreAlfabet());
+                holder.scoreView.setText("Overall Score : "+model.getQuest3Score());
                 holder.dateView.setText("Date Play : "+model.getDate());
             }
 
             @NonNull
             @Override
-            public Question2ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                return new Question2ViewHolder(LayoutInflater.from(HistoriQ2L1.this).inflate(R.layout.histori_list_layout, viewGroup, false));
-
+            public Question3ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                return new Question3ViewHolder(LayoutInflater.from(HistoriQ3L1.this).inflate(R.layout.histori_list_layout, viewGroup, false));
             }
         };
 

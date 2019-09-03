@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".History.HistoriQ2L1">
+    tools:context=".History.HistoriQ3L1">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/myRV2"></android.support.v7.widget.RecyclerView>
+        android:id="@+id/myRV3"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
