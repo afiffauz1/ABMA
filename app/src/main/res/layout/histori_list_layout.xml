@@ -1,24 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/scoreHis"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    app:cardCornerRadius="20dp"
+    android:elevation="90dp"
+    android:layout_margin="8dp"
+    >
+    
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Score"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        />
-    <TextView
-        android:id="@+id/dateHis"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Date time"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        />
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:background="#FF5A5F"
+        >
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/card_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lesson 1"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:textAlignment="center"
+            android:layout_marginTop="5dp"
+            />
+
+        <TextView
+            android:id="@+id/hisScoreView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:text="XXXXXXX"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:id="@+id/hisDateView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="XXXX-XX-XX"
+            android:textSize="20dp"
+            />
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

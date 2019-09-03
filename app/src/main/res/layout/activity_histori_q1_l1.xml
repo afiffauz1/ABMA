@@ -6,10 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".History.HistoriQ1L1">
 
-
-    <ListView
-        android:id="@+id/listviewQ1L1"
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
+        android:id="@+id/myRV"></android.support.v7.widget.RecyclerView>
+
 </RelativeLayout>
