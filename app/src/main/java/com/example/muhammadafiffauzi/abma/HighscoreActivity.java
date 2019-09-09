@@ -1,8 +1,10 @@
 package com.example.muhammadafiffauzi.abma;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +23,7 @@ public class HighscoreActivity extends AppCompatActivity {
     private String currentUserId;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase, userDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,15 @@ public class HighscoreActivity extends AppCompatActivity {
         currentUserId = mAuth.getCurrentUser().getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Lesson1HS").child(currentUserId);
+        userDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUserId);
+
+        btnToLeaderBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HighscoreActivity.this, Leaderboard.class);
+                startActivity(intent);
+            }
+        });
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -55,8 +66,8 @@ public class HighscoreActivity extends AppCompatActivity {
                 String s = String.valueOf(lesson1HS);
 
                 highScoreTV.setText(s);
+                userDatabase.child("highscore").setValue(lesson1HS);
 
-                Toast.makeText(HighscoreActivity.this, "hs : "+s , Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -64,6 +75,5 @@ public class HighscoreActivity extends AppCompatActivity {
 
             }
         });
-
     }
 }

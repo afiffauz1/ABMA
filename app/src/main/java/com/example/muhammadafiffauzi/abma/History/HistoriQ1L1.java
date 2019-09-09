@@ -55,7 +55,7 @@ public class HistoriQ1L1 extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser().getUid();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Question1").child(currentUser);
+        mDatabase = FirebaseDatabase.getInstance().getReference("Question1").child(currentUser);
         mDatabase.keepSynced(true);
 
         arrayList = new ArrayList<Question1Model>();
