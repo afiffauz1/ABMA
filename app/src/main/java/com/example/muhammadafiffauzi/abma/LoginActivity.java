@@ -1,5 +1,7 @@
 package com.example.muhammadafiffauzi.abma;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button createAccount;
 
     private ProgressDialog loading;
+    private AlertDialog.Builder dialog;
 
     private FirebaseAuth mAuth;
 
@@ -46,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         createAccount = (Button) findViewById(R.id.btn_create_account);
 
         loading = new ProgressDialog(this);
+        dialog = new AlertDialog.Builder(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -77,10 +81,16 @@ public class LoginActivity extends AppCompatActivity {
         loading.show();
 
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(LoginActivity.this, "enter your email...", Toast.LENGTH_SHORT).show();
+            dialog.setTitle("Peringatan!!!");
+            dialog.setMessage("Masukkan e-mail anda dengan benar");
+            dialog.setCancelable(true);
+            dialog.show();
             loading.dismiss();
         } else if (TextUtils.isEmpty(password)){
-            Toast.makeText(LoginActivity.this, "enter your password", Toast.LENGTH_SHORT).show();
+            dialog.setTitle("Peringatan!!!");
+            dialog.setMessage("Masukkan password anda dengan benar");
+            dialog.setCancelable(true);
+            dialog.show();
             loading.dismiss();
         } else {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -88,11 +98,13 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         sendUserToMainActivity();
-                        Toast.makeText(LoginActivity.this, "Welcome...", Toast.LENGTH_SHORT).show();
                         loading.dismiss();
                     } else {
                         String errorMsg = task.getException().getMessage();
-                        Toast.makeText(LoginActivity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
+                        dialog.setTitle("Peringatan!!!");
+                        dialog.setMessage(errorMsg);
+                        dialog.setCancelable(true);
+                        dialog.show();
                         loading.dismiss();
                     }
                 }

@@ -1,5 +1,6 @@
 package com.example.muhammadafiffauzi.abma;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.provider.ContactsContract;
@@ -24,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnSubmit;
     private EditText userEmail, userPassword;
     private ProgressDialog loading;
+    private AlertDialog.Builder dialog;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -41,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         userEmail = (EditText) findViewById(R.id.input_email);
         userPassword = (EditText) findViewById(R.id.input_password);
         loading = new ProgressDialog(this);
+        dialog = new AlertDialog.Builder(this);
 
         //ketika button register di tekan
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -51,12 +54,16 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = userPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)){
-                    Toast.makeText(RegisterActivity.this, "enter your email...", Toast.LENGTH_SHORT).show();
-
+                    dialog.setTitle("Peringatan!!!");
+                    dialog.setMessage("Masukkan e-mail anda dengan benar");
+                    dialog.setCancelable(true);
+                    dialog.show();
                 }
                 else if (TextUtils.isEmpty(password)){
-                    Toast.makeText(RegisterActivity.this, "enter your password...", Toast.LENGTH_SHORT).show();
-
+                    dialog.setTitle("Peringatan!!!");
+                    dialog.setMessage("Masukkan e-mail anda dengan benar");
+                    dialog.setCancelable(true);
+                    dialog.show();
                 } else {
                     createNewAccount();
                 }
@@ -68,8 +75,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void createNewAccount() {
 
-        loading.setTitle("Creating new account");
-        loading.setMessage("Please wait...");
+        loading.setTitle("Membuat akun baru");
+        loading.setMessage("Tunggu sebentar...");
         loading.setCanceledOnTouchOutside(true);
         loading.show();
 
@@ -82,11 +89,14 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
 
                         sendUserToMainActivity();
-                        Toast.makeText(RegisterActivity.this, "Account has been created", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Akun berhasil dibuat", Toast.LENGTH_SHORT).show();
                         loading.dismiss();
                     } else {
                         String errorMsg = task.getException().getMessage();
-                        Toast.makeText(RegisterActivity.this, "Failed : "+ errorMsg, Toast.LENGTH_SHORT).show();
+                        dialog.setTitle("Peringatan!!!");
+                        dialog.setMessage(errorMsg);
+                        dialog.setCancelable(true);
+                        dialog.show();
                         loading.dismiss();
                     }
                 }
