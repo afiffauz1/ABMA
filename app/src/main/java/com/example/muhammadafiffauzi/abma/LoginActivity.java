@@ -80,15 +80,9 @@ public class LoginActivity extends AppCompatActivity {
         loading.setCanceledOnTouchOutside(true);
         loading.show();
 
-        if(TextUtils.isEmpty(email)){
+        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
             dialog.setTitle("Peringatan!!!");
-            dialog.setMessage("Masukkan e-mail anda dengan benar");
-            dialog.setCancelable(true);
-            dialog.show();
-            loading.dismiss();
-        } else if (TextUtils.isEmpty(password)){
-            dialog.setTitle("Peringatan!!!");
-            dialog.setMessage("Masukkan password anda dengan benar");
+            dialog.setMessage("Masukkan e-mail atau password anda dengan benar");
             dialog.setCancelable(true);
             dialog.show();
             loading.dismiss();
