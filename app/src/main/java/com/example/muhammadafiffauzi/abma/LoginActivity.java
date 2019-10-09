@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
             dialog.setTitle("Peringatan!!!");
             dialog.setMessage("Masukkan e-mail atau password anda dengan benar");
-            dialog.setCancelable(true);
+            dialog.setNegativeButton("OK", null);
             dialog.show();
             loading.dismiss();
         } else {
@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                         String errorMsg = task.getException().getMessage();
                         dialog.setTitle("Peringatan!!!");
                         dialog.setMessage(errorMsg);
-                        dialog.setCancelable(true);
+                        dialog.setNegativeButton("OK", null);
                         dialog.show();
                         loading.dismiss();
                     }
