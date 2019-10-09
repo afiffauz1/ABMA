@@ -51,7 +51,7 @@
                 android:layout_below="@+id/input_email"
                 android:inputType="textPassword"
                 android:background="@drawable/button_overline"
-                android:hint="Password..."
+                android:hint="Kata Sandi..."
                 android:padding="4dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"
@@ -67,7 +67,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/button_solid"
-                android:text="REGISTER"
+                android:text="DAFTAR"
                 android:textColor="#ffffff"
                 android:textSize="20dp"
                 />
