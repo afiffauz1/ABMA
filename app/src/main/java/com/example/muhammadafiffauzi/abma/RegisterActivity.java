@@ -56,13 +56,13 @@ public class RegisterActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(email)){
                     dialog.setTitle("Peringatan!!!");
                     dialog.setMessage("Masukkan e-mail anda dengan benar");
-                    dialog.setNegativeButton("OK", null);
+                    dialog.setCancelable(true);
                     dialog.show();
                 }
                 else if (TextUtils.isEmpty(password)){
                     dialog.setTitle("Peringatan!!!");
-                    dialog.setMessage("Masukkan password anda dengan benar");
-                    dialog.setNegativeButton("OK", null);
+                    dialog.setMessage("Masukkan e-mail anda dengan benar");
+                    dialog.setCancelable(true);
                     dialog.show();
                 } else {
                     createNewAccount();
@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                         String errorMsg = task.getException().getMessage();
                         dialog.setTitle("Peringatan!!!");
                         dialog.setMessage(errorMsg);
-                        dialog.setNegativeButton("OK", null);
+                        dialog.setCancelable(true);
                         dialog.show();
                         loading.dismiss();
                     }
