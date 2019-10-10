@@ -9,7 +9,7 @@ import com.example.muhammadafiffauzi.abma.R;
 
 public class LeaderboardHolder extends RecyclerView.ViewHolder {
 
-    public TextView userNameView, userScoreView;
+    public TextView userNameView, userScoreView, nomorUrut;
 
     public LeaderboardHolder(@NonNull View itemView){
         super(itemView);

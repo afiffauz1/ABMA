@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.muhammadafiffauzi.abma.Holder.LeaderboardHolder;
 import com.example.muhammadafiffauzi.abma.Holder.Question1ViewHolder;
@@ -16,6 +17,7 @@ import com.example.muhammadafiffauzi.abma.Model.Question1Model;
 import com.example.muhammadafiffauzi.abma.Model.Users;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -83,6 +85,8 @@ public class Leaderboard extends AppCompatActivity {
                 holder.userNameView.setText(model.getName());
                 String hs = String.valueOf(model.getHighscore());
                 holder.userScoreView.setText(hs);
+
+
             }
 
             @NonNull
