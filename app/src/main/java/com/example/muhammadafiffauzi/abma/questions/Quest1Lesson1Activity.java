@@ -3,12 +3,14 @@ package com.example.muhammadafiffauzi.abma.questions;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
@@ -177,7 +179,6 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
 
         int total = (int) matches.size().height + (int) matches.size().width;
 
-
         if (total >= 490){
 
             saveScore(quest1Id, tingkat10, tanggal,alfaA);
@@ -223,11 +224,17 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
             saveScore(quest1Id, tingkat2, tanggal, alfaE);
             sendUserToScoreActivity(tingkat2, alfaE);
 
-        }else{
+        }else if (total >= 300 && total <= 454){
 
             saveScore(quest1Id, tingkat1, tanggal, alfaE);
             sendUserToScoreActivity(tingkat1, alfaE);
 
+        } else {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setTitle("Peringatan!!!");
+            dialog.setMessage("Mohon kerjakan dengan benar");
+            dialog.setNegativeButton("Ok", null);
+            dialog.show();
         }
         paintView.destroyDrawingCache();
     }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -223,11 +224,17 @@ public class Quest2Lesson1Activity extends AppCompatActivity {
             saveScore(quest2Id, tingkat2, tanggal, alfaE);
             sendUserToScoreActivity(tingkat2, alfaE);
 
-        }else{
+        }else if (total >= 300 && total <= 454){
 
             saveScore(quest2Id, tingkat1, tanggal, alfaE);
             sendUserToScoreActivity(tingkat1, alfaE);
 
+        } else {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setTitle("Peringatan!!!");
+            dialog.setMessage("Mohon kerjakan dengan benar");
+            dialog.setNegativeButton("Ok", null);
+            dialog.show();
         }
 
         paintView.destroyDrawingCache();
