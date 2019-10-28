@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.muhammadafiffauzi.abma.Model.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -93,26 +94,10 @@ public class AccountActivity extends AppCompatActivity {
             Toast.makeText(AccountActivity.this, "please input your status...", Toast.LENGTH_SHORT).show();
         } else  {
 
-            HashMap<String, String> profileMap = new HashMap<>();
-            profileMap.put("uid", currentUserId);
-            profileMap.put("name", setUserName);
-            profileMap.put("status", setStatus);
-
-            mDatabase.child("Users").child(currentUserId).setValue(profileMap)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-
-                                sendUserToMainActivity();
-                                Toast.makeText(AccountActivity.this, "Profile has been updated", Toast.LENGTH_SHORT).show();
-                            } else {
-
-                                String errorMsg = task.getException().toString();
-                                Toast.makeText(AccountActivity.this, "Failed : "+errorMsg, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+            Users users = new Users(currentUserId, setUserName, setStatus, 0);
+            mDatabase.child("Users").child(currentUserId).setValue(users);
+            sendUserToMainActivity();
+            Toast.makeText(AccountActivity.this, "Profile has been updated", Toast.LENGTH_SHORT).show();
         }
     }
 

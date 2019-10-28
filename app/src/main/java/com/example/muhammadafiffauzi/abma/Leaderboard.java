@@ -73,7 +73,7 @@ public class Leaderboard extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mDatabase.keepSynced(true);
 
-        mQuery = mDatabase.orderByChild("highscore").limitToFirst(10);
+        mQuery = mDatabase.orderByChild("highscore");
 
         arrayList = new ArrayList<Users>();
 
