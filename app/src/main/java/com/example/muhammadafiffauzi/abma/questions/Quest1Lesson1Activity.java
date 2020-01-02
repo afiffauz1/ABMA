@@ -129,6 +129,7 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
         String tingkat3 = "30";
         String tingkat2 = "20";
         String tingkat1 = "10";
+        String tingkat0 = "0";
         String alfaA = "A";
         String alfaB = "B";
         String alfaC = "C";
@@ -230,11 +231,8 @@ public class Quest1Lesson1Activity extends AppCompatActivity {
             sendUserToScoreActivity(tingkat1, alfaE);
 
         } else {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setTitle("Peringatan!!!");
-            dialog.setMessage("Mohon kerjakan dengan benar");
-            dialog.setNegativeButton("Ok", null);
-            dialog.show();
+            saveScore(quest1Id, tingkat0, tanggal, alfaE);
+            sendUserToScoreActivity(tingkat0, alfaE);
         }
         paintView.destroyDrawingCache();
     }

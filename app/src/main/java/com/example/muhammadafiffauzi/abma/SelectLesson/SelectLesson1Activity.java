@@ -5,33 +5,22 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.muhammadafiffauzi.abma.HighscoreActivity;
 import com.example.muhammadafiffauzi.abma.LevelListActivity;
-import com.example.muhammadafiffauzi.abma.Model.Lesson1;
-import com.example.muhammadafiffauzi.abma.Model.Question1Model;
 import com.example.muhammadafiffauzi.abma.Model.QuestionTotalScore;
 import com.example.muhammadafiffauzi.abma.R;
-import com.example.muhammadafiffauzi.abma.ScoreActivity;
 import com.example.muhammadafiffauzi.abma.questions.Quest1Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest2Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest3Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest4Lesson1Activity;
 import com.example.muhammadafiffauzi.abma.questions.Quest5Lesson1Activity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SelectLesson1Activity extends AppCompatActivity {
 
@@ -41,10 +30,6 @@ public class SelectLesson1Activity extends AppCompatActivity {
     private String currentUserId;
     private FirebaseAuth mAuth;
     private DatabaseReference quest1Database, quest2Database,quest3Database, quest4Database, quest5Database, mDatabase;
-
-    ArrayList<Question1Model> arrayList =  new ArrayList<>();
-    ArrayAdapter<String> arrayAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

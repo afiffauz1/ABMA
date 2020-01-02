@@ -28,7 +28,6 @@ public class AccountActivity extends AppCompatActivity {
 
     private Button btn_update;
     private EditText userName, userStatus;
-    private CircleImageView userProfpic;
 
     private String currentUserId;
     private FirebaseAuth mAuth;
@@ -42,7 +41,6 @@ public class AccountActivity extends AppCompatActivity {
         btn_update = (Button) findViewById(R.id.btn_update);
         userName = (EditText) findViewById(R.id.set_username);
         userStatus = (EditText) findViewById(R.id.set_status);
-        userProfpic = (CircleImageView) findViewById(R.id.user_profpic);
 
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
